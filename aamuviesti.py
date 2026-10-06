@@ -10,6 +10,7 @@ Ympäristömuuttujat:
     RAJAT   liikerajat dollareina, oletus 17,50,100
 """
 import html
+import json
 import math
 import os
 import sys
@@ -212,7 +213,44 @@ def laheta(teksti):
     return False
 
 
+ENNUSTE_TIEDOSTO = "ennuste.json"
+
+
+def lahetetty_tanaan():
+    """Varmuusajo (GitHubin oma ajastus) ohitetaan, jos tämän päivän viesti on jo lähetetty."""
+    try:
+        with open(ENNUSTE_TIEDOSTO, encoding="utf-8") as f:
+            vanha = json.load(f)
+        return vanha.get("lahetetty") == datetime.now(HKI).date().isoformat()
+    except (OSError, ValueError):
+        return False
+
+
+def tallenna_json(e, tapahtumat, kalenteri_virhe, ennuste_virhe, lahetetty):
+    """Sama ennuste koneluettavana, jotta Clauden aamututkimus voi käyttää sitä."""
+    nyt = datetime.now(HKI)
+    data = {
+        "luotu": nyt.isoformat(timespec="minutes"),
+        "lahetetty": nyt.date().isoformat() if lahetetty else None,
+        "paiva": (e["kohdepaiva"] if e else nyt.date()).isoformat(),
+        "tyyppi": ("iso" if e["iso"] else "rauhallinen") if e else None,
+        "odotettu_liike_pros": round(e["odotettu"] * 100, 3) if e else None,
+        "tavallinen_liike_pros": round(e["normaali"] * 100, 3) if e else None,
+        "todennakoisyys": {f"{u:g}": round(v, 3) for u, v in e["todennakoisyys"].items()} if e else None,
+        "pienin_stoppi_usd": round(e["heilahdus3h"], 1) if e else None,
+        "futuurin_hinta": round(e["hinta"], 1) if e else None,
+        "julkaisut": [{"klo": a.strftime("%H:%M"), "nimi": n, "odotus": o, "edellinen": ed} for a, n, o, ed in tapahtumat],
+        "ennuste_virhe": ennuste_virhe,
+        "kalenteri_virhe": kalenteri_virhe,
+    }
+    with open(ENNUSTE_TIEDOSTO, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+
+
 def main():
+    if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and lahetetty_tanaan():
+        print("Tämän päivän viesti on jo lähetetty, varmuusajo ohitetaan.")
+        return
     tili = float(asetus("TILI", "1000"))
     riski = float(asetus("RISKI", "1"))
     rajat_usd = [float(x) for x in asetus("RAJAT", "17,50,100").split(",")]
@@ -229,7 +267,9 @@ def main():
     teksti = tee_viesti(e, tapahtumat, kalenteri_virhe, tili, riski, rajat_usd, ennuste_virhe)
     print(teksti)
     print()
-    if not laheta(teksti):
+    ok = laheta(teksti)
+    tallenna_json(e, tapahtumat, kalenteri_virhe, ennuste_virhe, ok)
+    if not ok:
         sys.exit(1)
 
 
