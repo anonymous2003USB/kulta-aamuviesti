@@ -1,11 +1,14 @@
 name: Aamuviesti
 
 on:
+  # Pääkäynnistys: cron-job.org kutsuu tätä ma–pe klo 8.10 Suomen aikaa ("Run workflow" -nappi toimii myös käsin).
+  workflow_dispatch:
+  # Varmuusajo: GitHubin oma ajastus myöhästyy usein tunteja. Jos aamun viesti on jo lähetetty, ajo ohitetaan.
   schedule:
-    # Ma–pe klo 05.15 UTC = 8.15 Suomen kesäaikaa, 7.15 talviaikaa.
-    # GitHub voi myöhästyä ajastetuista ajoista ruuhka-aikoina jonkin verran.
     - cron: "15 5 * * 1-5"
-  workflow_dispatch:   # "Run workflow" -nappi käsin käynnistämiseen
+
+permissions:
+  contents: write   # ennuste.json tallennetaan kansioon Clauden luettavaksi
 
 jobs:
   viesti:
@@ -24,3 +27,14 @@ jobs:
           TILI: ${{ vars.TILI }}
           RISKI: ${{ vars.RISKI }}
           RAJAT: ${{ vars.RAJAT }}
+      - name: Tallenna ennuste.json
+        if: always()
+        run: |
+          if [ -z "$(git status --porcelain -- ennuste.json)" ]; then
+            echo "Ei uutta ennustetta tallennettavaksi."; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ennuste.json
+          git commit -m "Ennuste $(date -u +%F)"
+          git push
