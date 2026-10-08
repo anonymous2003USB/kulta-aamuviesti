@@ -1,25 +1,18 @@
 {
- "luotu": "2026-10-07T08:10+03:00",
- "lahetetty": "2026-10-07",
- "paiva": "2026-10-07",
+ "luotu": "2026-10-08T08:10+03:00",
+ "lahetetty": "2026-10-08",
+ "paiva": "2026-10-08",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.219,
+ "odotettu_liike_pros": 1.253,
  "tavallinen_liike_pros": 1.534,
  "todennakoisyys": {
   "17": 0.947,
-  "50": 0.289,
+  "50": 0.287,
   "100": 0.037
  },
- "pienin_stoppi_usd": 14.0,
- "futuurin_hinta": 4161.0,
- "julkaisut": [
-  {
-   "klo": "21:00",
-   "nimi": "FOMC Meeting Minutes",
-   "odotus": "",
-   "edellinen": ""
-  }
- ],
+ "pienin_stoppi_usd": 13.9,
+ "futuurin_hinta": 4156.1,
+ "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
