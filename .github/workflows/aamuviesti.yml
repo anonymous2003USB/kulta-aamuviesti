@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write   # ennuste.json tallennetaan kansioon Clauden luettavaksi
+  actions: write    # käynnistää päivän hintasyötteen (hinnat.yml)
 
 jobs:
   viesti:
@@ -38,3 +39,8 @@ jobs:
           git add ennuste.json
           git commit -m "Ennuste $(date -u +%F)"
           git push
+      - name: Käynnistä päivän hintasyöte
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run hinnat.yml --ref main -R "$GITHUB_REPOSITORY" -f kertaa=0

@@ -1,0 +1,36 @@
+name: Hinnat
+
+on:
+  # Aamuviesti käynnistää tämän joka arkiaamu. "Run workflow" toimii myös käsin.
+  workflow_dispatch:
+    inputs:
+      kertaa:
+        description: "1 = hae kerran, 0 = päivitä 5 min välein klo 21.15 asti"
+        default: "0"
+  # Varmuusajo, jos aamuviestin käynnistys ei tullut (GitHubin ajastus voi myöhästyä).
+  schedule:
+    - cron: "50 5 * * 1-5"
+
+permissions:
+  contents: write   # hinnat-haaran päivitys
+  actions: write    # uudelleenkäynnistys 6 tunnin rajan jälkeen
+
+concurrency:
+  group: hinnat
+  cancel-in-progress: false
+
+jobs:
+  hae:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install dukascopy-python pandas
+      - name: Hae ja julkaise hinnat
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KERTAA: ${{ inputs.kertaa || '0' }}
+        run: bash claude/hinnat_silmukka.sh
