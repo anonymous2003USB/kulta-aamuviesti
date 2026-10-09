@@ -4,7 +4,7 @@ Tämä lähettää sinulle joka arkiaamu noin klo 8.15 (talviaikaan 7.15) viesti
 
 - tuleeko kullasta tänään iso vai rauhallinen päivä
 - tämän päivän isot USD-julkaisut Suomen ajassa (esim. työllisyysraportti klo 15.30)
-- todennäköisyys, että hinta karkaa 17 $, 50 $ tai 100 $ johonkin suuntaan
+- todennäköisyys, että hinta karkaa 30 $, 50 $ tai 100 $ johonkin suuntaan
 - kuinka kaukana stopin kannattaa vähintään olla, ja paljonko pienin kauppa voi hävitä
 
 Viesti ei kerro suuntaa. Se on tarkoitettu siihen, että tiedät aamulla, millainen päivä on tulossa.
@@ -83,14 +83,14 @@ Valmis. Tästä eteenpäin viesti tulee joka arkiaamu itsestään.
 
 ## Omat asetukset (vapaaehtoinen)
 
-Oletuksena viesti laskee kauppakoon 1 000 $:n tilille 1 %:n riskillä ja näyttää rajat 17, 50 ja 100 $.
+Oletuksena viesti laskee kauppakoon 1 000 $:n tilille 1 %:n riskillä ja näyttää rajat 30, 50 ja 100 $.
 Muuttaaksesi: **Settings → Secrets and variables → Actions → Variables → New repository variable**:
 
 | Name | Esimerkki | Mitä tekee |
 |---|---|---|
 | `TILI` | `2500` | tilisi koko dollareina |
 | `RISKI` | `0.5` | montako prosenttia tilistä saa hävitä yhdessä kaupassa |
-| `RAJAT` | `17,25,50,100` | liikerajat dollareina |
+| `RAJAT` | `30,50,100` | liikerajat dollareina (asetettu suoraan tiedostoon `.github/workflows/aamuviesti.yml`, muuttuja ei vaikuta) |
 
 ## Hyvä tietää
 

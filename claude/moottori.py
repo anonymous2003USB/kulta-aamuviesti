@@ -3,6 +3,8 @@
 Säännöt (samat kuin kaikissa aiemmissa testeissä):
 - Markkinakauppa täyttyy kirjausminuutin avaushintaan (osto ask, myynti bid). 12.10.2026 alkaen SL ja TP ovat
   etäisyyksiä kirjatusta entrystä, jolloin vanhentunut hinta ei voi siirtää tasoja.
+- Ison julkaisun lähellä (lahella_julkaisua = true) markkinakauppa täyttyy minuutin huonoimpaan hintaan
+  (osto ask high, myynti bid low), koska hinta hyppii sekunneissa.
 - Limit-kauppa täyttyy, kun hinta koskettaa tasoa (osto: ask low <= entry, myynti: bid high >= entry) ennen
   voimassaolon loppua. Jos hinta avautuu tason yli, täyttö tapahtuu avaushintaan. Jos TP-taso saavutetaan ennen
   täyttöä, toimeksianto perutaan. Täyttymätön toimeksianto perutaan voimassaolon päättyessä.
@@ -14,6 +16,18 @@ import pandas as pd
 
 TZ = "Europe/Helsinki"
 ETAISYYS_ALKAEN = "2026-10-12"
+MAX_KAUPPOJA = 6
+MAX_TAPPIOITA = 3
+MIN_KAUPPOJA = 2
+
+
+def julkaisun_lahella(nyt, julkaisut, ennen=15, jalkeen=15):
+    """Palauttaa julkaisun kellonajan, jos nyt on 15 min ennen – 15 min jälkeen siitä, muuten None."""
+    for j in julkaisut:
+        tj = pd.Timestamp(f"{nyt:%Y-%m-%d} {j}")
+        if tj - pd.Timedelta(minutes=ennen) <= nyt <= tj + pd.Timedelta(minutes=jalkeen):
+            return j
+    return None
 
 
 class Hinnat:
@@ -131,7 +145,10 @@ def ratkaise_kauppa(H, x):
             huom_tauko = f"markkina kiinni kirjaushetkellä, täyttö {H.t[jf].tz_convert(TZ):%H:%M}"
         else:
             huom_tauko = ""
-        f = float(H.ao[jf] if u == 1 else H.bo[jf])
+        if x.get("lahella_julkaisua"):
+            f = float(H.ah[jf] if u == 1 else H.bl[jf])
+        else:
+            f = float(H.ao[jf] if u == 1 else H.bo[jf])
         if x.get("pvm", "") >= ETAISYYS_ALKAEN:
             sl, tp = f - u * abs(e - sl), f + u * abs(tp - e)
         if (u == 1 and (f <= sl or f >= tp)) or (u == -1 and (f >= sl or f <= tp)):
@@ -161,7 +178,8 @@ def ratkaise_kauppa(H, x):
 def tarkista_kauppa(k, tila):
     """Palauttaa listan virheistä. Tyhjä lista = kaupan saa kirjata.
     k: suunta, tyyppi (markkina/limit), entry, sl, tp, [voimassa_hki "YYYY-MM-DD HH:MM"]
-    tila: bid, ask, datan_ika_min, nyt_hki "YYYY-MM-DD HH:MM", kauppoja_tanaan, tappioita_tanaan, julkaisut ["HH:MM"]"""
+    tila: bid, ask, datan_ika_min, nyt_hki "YYYY-MM-DD HH:MM", kauppoja_tanaan, tappioita_tanaan, julkaisut ["HH:MM"]
+    Rajat: enintään 6 kauppaa päivässä, ei uusia kauppoja 3 tappion jälkeen."""
     v = []
     if k.get("suunta") not in ("osto", "myynti"):
         return ["suunta pitää olla osto tai myynti"]
@@ -181,10 +199,10 @@ def tarkista_kauppa(k, tila):
         v.append(f"RR {abs(tp - e) / riski:.2f} (vähintään 2)")
     if tila.get("datan_ika_min") is None or tila["datan_ika_min"] > 15:
         v.append(f"data liian vanha ({tila.get('datan_ika_min')} min)")
-    if tila.get("kauppoja_tanaan", 0) >= 3:
-        v.append("päivän 3 kauppaa on jo tehty")
-    if tila.get("tappioita_tanaan", 0) >= 2:
-        v.append("2 tappiota tänään: ei uusia kauppoja")
+    if tila.get("kauppoja_tanaan", 0) >= MAX_KAUPPOJA:
+        v.append(f"päivän {MAX_KAUPPOJA} kauppaa on jo tehty")
+    if tila.get("tappioita_tanaan", 0) >= MAX_TAPPIOITA:
+        v.append(f"{MAX_TAPPIOITA} tappiota tänään: ei uusia kauppoja")
     nyt = pd.Timestamp(tila["nyt_hki"])
     if not (nyt.hour >= 9 and (nyt.hour < 21 or (nyt.hour == 21 and nyt.minute == 0))):
         v.append("kauppoja vain klo 9.00–21.00")
@@ -193,10 +211,10 @@ def tarkista_kauppa(k, tila):
         markkina = ask if u == 1 else bid
         if abs(e - markkina) > 1.0:
             v.append(f"entry {e} ei vastaa markkinahintaa {markkina}")
-        for j in tila.get("julkaisut", []):
-            tj = pd.Timestamp(f"{nyt:%Y-%m-%d} {j}")
-            if tj - pd.Timedelta(minutes=30) <= nyt <= tj + pd.Timedelta(minutes=15):
-                v.append(f"ison julkaisun ({j}) lähellä ei avata markkinakauppaa")
+        lahella = julkaisun_lahella(nyt, tila.get("julkaisut", []))
+        if lahella and not k.get("lahella_julkaisua"):
+            v.append(f"ison julkaisun ({lahella}) lähellä: lisää kauppaan kenttä \"lahella_julkaisua\": true "
+                     "(täyttö lasketaan minuutin huonoimpaan hintaan)")
     else:
         if u == 1 and not e < ask:
             v.append("osto-limitin pitää olla markkinahinnan alapuolella")

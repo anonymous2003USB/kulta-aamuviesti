@@ -7,7 +7,7 @@ Ympäristömuuttujat:
     TELEGRAM_TOKEN, TELEGRAM_CHAT_ID   lähettämiseen (GitHubissa "Secrets")
     TILI    tilin koko dollareina, oletus 1000
     RISKI   riski prosentteina per kauppa, oletus 1
-    RAJAT   liikerajat dollareina, oletus 17,50,100
+    RAJAT   liikerajat dollareina, oletus 30,50,100
 """
 import html
 import json
@@ -253,7 +253,7 @@ def main():
         return
     tili = float(asetus("TILI", "1000"))
     riski = float(asetus("RISKI", "1"))
-    rajat_usd = [float(x) for x in asetus("RAJAT", "17,50,100").split(",")]
+    rajat_usd = [float(x) for x in asetus("RAJAT", "30,50,100").split(",")]
 
     e, ennuste_virhe = None, None
     try:

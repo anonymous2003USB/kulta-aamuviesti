@@ -129,6 +129,10 @@ def test_moottori():
     r = M.ratkaise_kauppa(H, dict(suunta="myynti", tyyppi="markkina", aika_utc="2026-01-06T09:05:00Z",
                                   entry=2000, sl=2010, tp=1980))
     ok("markkinamyynti -> SL", r["tila"] == "suljettu" and r["syy"] == "sl" and r["tulos_oz"] < -9.9, r)
+    # julkaisun lähellä: täyttö minuutin huonoimpaan hintaan (osto ask high 2000.8)
+    r = M.ratkaise_kauppa(H, dict(suunta="osto", tyyppi="markkina", aika_utc="2026-01-06T09:00:00Z", lahella_julkaisua=True,
+                                  entry=2000.3, sl=1990.3, tp=2010.3))
+    ok("julkaisukauppa täyttyy minuutin huonoimpaan hintaan", r.get("taytto") == 2000.8, r)
     # data loppuu ennen aikarajaa -> auki
     r = M.ratkaise_kauppa(H, dict(suunta="osto", tyyppi="markkina", aika_utc="2026-01-06T09:40:00Z",
                                   entry=2012.3, sl=2002.3, tp=2032.3))
@@ -145,10 +149,15 @@ def test_tarkistin():
     ok("RR alle 2 hylätään", M.tarkista_kauppa({**perus, "tp": 2010.3}, tila) != [])
     ok("liian iso SL hylätään", M.tarkista_kauppa({**perus, "sl": 1960.3, "tp": 2080.3}, tila) != [])
     ok("vanha data hylätään", M.tarkista_kauppa(perus, {**tila, "datan_ika_min": 25}) != [])
-    ok("4. kauppa hylätään", M.tarkista_kauppa(perus, {**tila, "kauppoja_tanaan": 3}) != [])
-    ok("2 tappion jälkeen hylätään", M.tarkista_kauppa(perus, {**tila, "tappioita_tanaan": 2}) != [])
-    ok("julkaisun lähellä markkinakauppa hylätään",
-       M.tarkista_kauppa(perus, {**tila, "julkaisut": ["12:15"]}) != [])
+    ok("6. kauppa hyväksytään", M.tarkista_kauppa(perus, {**tila, "kauppoja_tanaan": 5}) == [])
+    ok("7. kauppa hylätään", M.tarkista_kauppa(perus, {**tila, "kauppoja_tanaan": 6}) != [])
+    ok("2 tappion jälkeen hyväksytään", M.tarkista_kauppa(perus, {**tila, "tappioita_tanaan": 2}) == [])
+    ok("3 tappion jälkeen hylätään", M.tarkista_kauppa(perus, {**tila, "tappioita_tanaan": 3}) != [])
+    ok("julkaisun lähellä ilman merkintää hylätään",
+       M.tarkista_kauppa(perus, {**tila, "julkaisut": ["12:10"]}) != [])
+    ok("julkaisun lähellä merkinnällä hyväksytään",
+       M.tarkista_kauppa({**perus, "lahella_julkaisua": True}, {**tila, "julkaisut": ["12:10"]}) == [])
+    ok("julkaisu 30 min päässä ei vaadi merkintää", M.tarkista_kauppa(perus, {**tila, "julkaisut": ["12:30"]}) == [])
     lim = dict(suunta="osto", tyyppi="limit", entry=1995, sl=1987, tp=2011, voimassa_hki="2026-01-06 16:00")
     ok("limit-osto markkinan alla hyväksytään", M.tarkista_kauppa(lim, tila) == [], M.tarkista_kauppa(lim, tila))
     ok("limit-osto markkinan yllä hylätään", M.tarkista_kauppa({**lim, "entry": 2005, "sl": 1997, "tp": 2021}, tila) != [])
