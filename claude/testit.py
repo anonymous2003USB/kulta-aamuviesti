@@ -161,8 +161,16 @@ def test_tarkistin():
     lim = dict(suunta="osto", tyyppi="limit", entry=1995, sl=1987, tp=2011, voimassa_hki="2026-01-06 16:00")
     ok("limit-osto markkinan alla hyväksytään", M.tarkista_kauppa(lim, tila) == [], M.tarkista_kauppa(lim, tila))
     ok("limit-osto markkinan yllä hylätään", M.tarkista_kauppa({**lim, "entry": 2005, "sl": 1997, "tp": 2021}, tila) != [])
-    ok("limit, jonka voimassaolo yli klo 21.00, hylätään",
-       M.tarkista_kauppa({**lim, "voimassa_hki": "2026-01-06 22:00"}, tila) != [])
+    ok("limit, jonka voimassaolo yli 4 h, hylätään",
+       M.tarkista_kauppa({**lim, "voimassa_hki": "2026-01-06 17:00"}, tila) != [])
+    ilta = {**tila, "nyt_hki": "2026-01-06 21:00"}
+    ok("klo 21 kauppa hyväksytään", M.tarkista_kauppa(perus, ilta) == [], M.tarkista_kauppa(perus, ilta))
+    ok("limit klo 23.30 asti hyväksytään", M.tarkista_kauppa({**lim, "voimassa_hki": "2026-01-06 23:30"}, ilta) == [])
+    ok("limit yli klo 23.30 hylätään", M.tarkista_kauppa({**lim, "voimassa_hki": "2026-01-06 23:45"}, ilta) != [])
+    ok("klo 3 kauppa hylätään (Aasian seuranta)", M.tarkista_kauppa(perus, {**tila, "nyt_hki": "2026-01-06 03:00"}) != [])
+    t = pd.Timestamp("2026-10-12 19:10", tz="UTC")  # 22.10 Suomen aikaa
+    ok("uusi aikaraja klo 23.55", M.aikaraja(t, True) == pd.Timestamp("2026-10-12 23:55", tz=M.TZ))
+    ok("vanha aikaraja klo 23.00", M.aikaraja(t, False) == pd.Timestamp("2026-10-12 23:00", tz=M.TZ))
 
 
 if __name__ == "__main__":

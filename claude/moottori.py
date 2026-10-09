@@ -9,7 +9,8 @@ Säännöt (samat kuin kaikissa aiemmissa testeissä):
   voimassaolon loppua. Jos hinta avautuu tason yli, täyttö tapahtuu avaushintaan. Jos TP-taso saavutetaan ennen
   täyttöä, toimeksianto perutaan. Täyttymätön toimeksianto perutaan voimassaolon päättyessä.
 - SL tai TP, kumpi ensin. Sama minuutti -> SL. TP ei voi osua täyttöminuutissa.
-- Aikaraja: seuraava klo 23.00 Suomen aikaa, jolloin kauppa suljetaan markkinahintaan.
+- Aikaraja: 12.10.2026 alkaen klo 23.55 Suomen aikaa (ennen sitä seuraava klo 23.00), jolloin kauppa suljetaan
+  markkinahintaan.
 """
 import numpy as np
 import pandas as pd
@@ -49,9 +50,11 @@ class Hinnat:
         return int(np.searchsorted(self.tn, np.datetime64(aika.tz_convert("UTC").tz_localize(None)), side="left"))
 
 
-def aikaraja(tf):
+def aikaraja(tf, uusi=False):
+    """Vanhat kaupat (ennen 12.10.2026): seuraava klo 23.00. Uudet: klo 23.55 samana päivänä, ennen kullan
+    päivittäistä taukoa (00.00 Suomen aikaa), koska herätyksiä on myös klo 21 ja 23."""
     h = tf.tz_convert(TZ)
-    raja = h.normalize() + pd.Timedelta(hours=23)
+    raja = h.normalize() + (pd.Timedelta(hours=23, minutes=55) if uusi else pd.Timedelta(hours=23))
     if h >= raja:
         raja = raja + pd.Timedelta(days=1)
     return raja
@@ -101,6 +104,7 @@ def ratkaise_kauppa(H, x):
     """x = päiväkirjan kauppa (dict). Palauttaa dictin, jossa tila: suljettu / peruttu / auki / virheellinen."""
     u = 1 if x["suunta"] == "osto" else -1
     tyyppi = x.get("tyyppi", "markkina")
+    uusi = x.get("pvm", "") >= ETAISYYS_ALKAEN
     t0 = pd.Timestamp(x["aika_utc"]).tz_convert("UTC").ceil("min")
     e, sl, tp = float(x["entry"]), float(x["sl"]), float(x["tp"])
     loppu = H.t[-1]
@@ -109,7 +113,7 @@ def ratkaise_kauppa(H, x):
         return dict(tila="auki", huom="ei vielä dataa kirjaushetken jälkeen")
 
     if tyyppi == "limit":
-        t_end = _aika(x, "voimassa_utc", "voimassa_hki") or aikaraja(t0).tz_convert("UTC")
+        t_end = _aika(x, "voimassa_utc", "voimassa_hki") or aikaraja(t0, uusi).tz_convert("UTC")
         j1 = H.i(t_end)
         jf = f = None
         for j in range(j0, min(j1, len(H.t))):
@@ -154,7 +158,7 @@ def ratkaise_kauppa(H, x):
         if (u == 1 and (f <= sl or f >= tp)) or (u == -1 and (f >= sl or f <= tp)):
             return dict(tila="virheellinen", taytto=round(f, 2), huom="markkinahinta oli jo SL:n tai TP:n takana")
 
-    raja = aikaraja(H.t[jf])
+    raja = aikaraja(H.t[jf], uusi)
     je = min(H.i(raja), len(H.t))
     tulos, syy, jx = kauppa(H, jf, je, u, f, sl, tp)
     if syy == "aika" and raja > loppu:
@@ -204,8 +208,8 @@ def tarkista_kauppa(k, tila):
     if tila.get("tappioita_tanaan", 0) >= MAX_TAPPIOITA:
         v.append(f"{MAX_TAPPIOITA} tappiota tänään: ei uusia kauppoja")
     nyt = pd.Timestamp(tila["nyt_hki"])
-    if not (nyt.hour >= 9 and (nyt.hour < 21 or (nyt.hour == 21 and nyt.minute == 0))):
-        v.append("kauppoja vain klo 9.00–21.00")
+    if not (nyt.hour >= 6 and (nyt.hour < 23 or (nyt.hour == 23 and nyt.minute <= 30))):
+        v.append("kauppoja vain klo 6.00–23.30 (klo 1–6 vältetään, kaupat suljetaan klo 23.55)")
     bid, ask = float(tila["bid"]), float(tila["ask"])
     if tyyppi == "markkina":
         markkina = ask if u == 1 else bid
@@ -224,6 +228,8 @@ def tarkista_kauppa(k, tila):
             v.append("limitiltä puuttuu voimassa_hki")
         else:
             loppu = pd.Timestamp(k["voimassa_hki"])
-            if not (nyt < loppu <= nyt.normalize() + pd.Timedelta(hours=21)):
-                v.append("limitin voimassaolon pitää päättyä tänään viimeistään klo 21.00")
+            if not (nyt < loppu <= nyt.normalize() + pd.Timedelta(hours=23, minutes=30)):
+                v.append("limitin voimassaolon pitää päättyä tänään viimeistään klo 23.30")
+            elif loppu - nyt > pd.Timedelta(hours=4):
+                v.append("limitin voimassaolo enintään 4 tuntia")
     return v
