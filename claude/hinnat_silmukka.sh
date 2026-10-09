@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Hakee kullan kynttilät 5 minuutin välein ja julkaisee ne haaraan "hinnat" (vain viimeisin versio säilyy).
-# KERTAA=1: hae kerran. Muuten jatka klo 21.15 Suomen aikaa asti. GitHubin työ saa kestää enintään 6 h,
-# joten 5 h 40 min jälkeen työ käynnistää itsensä uudelleen.
+# Pyörii arkipäivisin yhtäjaksoisesti (ma 00.00 – la 00.00 Suomen aikaa). Haku tehdään klo 01.30–05.00
+# (Aasian avaukset) ja 07.00–23.59; muulloin odotetaan. GitHubin työ saa kestää enintään 6 h, joten
+# 5 h 40 min jälkeen työ käynnistää itsensä uudelleen. Lauantaina ja sunnuntaina työ päättyy.
+# KERTAA=1: hae kerran ja lopeta.
 set -u
 ALKU=$(date +%s)
 REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -19,13 +21,31 @@ julkaise() {
   )
 }
 
+jatka() {
+  for i in 1 2 3; do
+    gh workflow run hinnat.yml --ref main -R "$GITHUB_REPOSITORY" -f kertaa=0 && return 0
+    sleep 20
+  done
+  echo "Uudelleenkäynnistys epäonnistui."
+}
+
+if [ "${KERTAA:-0}" = "1" ]; then
+  julkaise
+  exit $?
+fi
+
 while true; do
-  julkaise || echo "Haku tai julkaisu epäonnistui, yritetään seuraavalla kierroksella."
-  [ "${KERTAA:-0}" = "1" ] && exit 0
-  KLO=$(TZ=Europe/Helsinki date +%-H%M)
-  [ "$KLO" -ge 2115 ] && exit 0
+  PV=$(TZ=Europe/Helsinki date +%u)   # 1 = maanantai ... 7 = sunnuntai
+  KLO=$((10#$(TZ=Europe/Helsinki date +%H%M)))
+  if [ "$PV" -ge 6 ]; then
+    echo "Viikonloppu: markkina kiinni."
+    exit 0
+  fi
+  if { [ "$KLO" -ge 130 ] && [ "$KLO" -lt 500 ]; } || [ "$KLO" -ge 700 ]; then
+    julkaise || echo "Haku tai julkaisu epäonnistui, yritetään seuraavalla kierroksella."
+  fi
   if [ $(( $(date +%s) - ALKU )) -gt 20400 ]; then
-    gh workflow run hinnat.yml --ref main -R "$GITHUB_REPOSITORY" -f kertaa=0
+    jatka
     exit 0
   fi
   sleep 300

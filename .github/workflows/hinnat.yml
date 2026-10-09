@@ -5,10 +5,13 @@ on:
   workflow_dispatch:
     inputs:
       kertaa:
-        description: "1 = hae kerran, 0 = päivitä 5 min välein klo 21.15 asti"
+        description: "1 = hae kerran, 0 = päivitä 5 min välein koko arkiviikon"
         default: "0"
-  # Varmuusajo, jos aamuviestin käynnistys ei tullut (GitHubin ajastus voi myöhästyä).
+  # Viikon käynnistys su klo 22.30 UTC (ma yöllä Suomen aikaa) ja päivittäinen varmuusajo.
+  # Työ pyörii arkipäivät yhtäjaksoisesti ja käynnistää itsensä uudelleen 6 tunnin välein.
+  # GitHubin ajastus voi myöhästyä, joten myös aamuviesti käynnistää tämän.
   schedule:
+    - cron: "30 22 * * 0"
     - cron: "50 5 * * 1-5"
 
 permissions:
