@@ -27,7 +27,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TILI: ${{ vars.TILI }}
           RISKI: ${{ vars.RISKI }}
-          RAJAT: ${{ vars.RAJAT }}
+          RAJAT: "30,50,100"   # käyttäjän päätös 9.10.2026
       - name: Tallenna ennuste.json
         if: always()
         run: |

@@ -62,6 +62,10 @@ def main(dbk, tanaan=None):
         lst = [x for x in smc if x.get("suunta") == s]
         if lst:
             print(f"    {s}: {tilasto(lst)}")
+    pak = [x for x in smc if x.get("pakotettu")]
+    if pak:
+        print(f"    Pakotetut (minimi 2/pv): {tilasto(pak)}")
+        print(f"    Ei pakotetut:            {tilasto([x for x in smc if not x.get('pakotettu')])}")
     perutut = [x for x in smc if x.get("tila") in ("peruttu", "virheellinen")]
     if perutut:
         print(f"  Peruttuja/virheellisiä toimeksiantoja: {len(perutut)}")
@@ -70,16 +74,18 @@ def main(dbk, tanaan=None):
         tulos = f"{x['tulosValittaja']:+.2f} $ ({R(x):+.1f} R, {x.get('syy', '')})" \
             if x.get("tila") == "suljettu" and isinstance(x.get("tulosValittaja"), (int, float)) else x.get("tila", "")
         print(f"  {x.get('pvm')} {x.get('klo')} {x.get('suunta'):6s} {x.get('tyyppi', 'markkina'):8s} "
-              f"{x.get('malli', '-'):16s} {tulos}")
+              f"{x.get('malli', '-'):16s} {tulos}{' PAKOTETTU' if x.get('pakotettu') else ''}"
+              f"{' (julkaisu)' if x.get('lahella_julkaisua') else ''}")
         if x.get("setup"):
             print(f"      setup: {x['setup']}")
         if x.get("opetus"):
             print(f"      opetus: {x['opetus']}")
     if tanaan:
-        t = [x for x in k if x.get("pvm") == tanaan and x.get("tila") != "virheellinen"]
+        t = [x for x in k if x.get("pvm") == tanaan and x.get("tila") not in ("virheellinen", "peruttu")]
         tappiot = [x for x in t if x.get("tila") == "suljettu" and x.get("tulosValittaja", 0) < 0]
         auki = [x for x in t if x.get("tila") == "auki"]
-        print(f"\nTÄNÄÄN {tanaan}: kirjattu {len(t)} (laskee 3:n rajaan), tappioita {len(tappiot)}, auki/odottaa {len(auki)}")
+        print(f"\nTÄNÄÄN {tanaan}: kauppoja {len(t)} (vähintään 2, enintään 6), tappioita {len(tappiot)} "
+              f"(3 tappion jälkeen ei uusia), auki/odottaa {len(auki)}")
         for x in auki:
             print(f"  auki: {x['_id']} {x['suunta']} {x.get('tyyppi', 'markkina')} entry {x['entry']} SL {x['sl']} TP {x['tp']}"
                   f"{' voimassa ' + x['voimassa_hki'] if x.get('voimassa_hki') else ''}")
