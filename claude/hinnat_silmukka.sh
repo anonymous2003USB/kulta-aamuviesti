@@ -9,8 +9,16 @@ ALKU=$(date +%s)
 REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 SKRIPTI="$PWD/claude/hae_hinnat.py"
 
+ANALYYSI="$PWD/claude/smc.py"
+AJAT="$PWD/claude/ajat.py"
+
 julkaise() {
   rm -rf /tmp/h && python "$SKRIPTI" /tmp/h || return 1
+  # Valmis analyysi ja chartit samaan haaraan: ajastetut sessiot lukevat ne datana, koodia ajamatta.
+  python "$ANALYYSI" /tmp/h /tmp/h/anal > /tmp/h/anal_tuloste.txt 2>&1
+  echo "paluukoodi $?" >> /tmp/h/anal_tuloste.txt
+  mv /tmp/h/anal_tuloste.txt /tmp/h/anal/analyysi_tuloste.txt 2>/dev/null || true
+  { python "$AJAT"; echo "--- Aasia"; python "$AJAT" --aasia; } > /tmp/h/ajat.txt 2>&1 || true
   (
     cd /tmp/h &&
     git init -q -b hinnat &&
