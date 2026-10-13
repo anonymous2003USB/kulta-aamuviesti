@@ -75,6 +75,15 @@ def test_kynttilakuviot():
     ok("sisäpäivä tunnistetaan", any(e["kuvio"] == "sisäpäivä" for e in smc.kynttilakuviot(k4, 4.0)))
 
 
+def test_yhdista():
+    import hae_hinnat as HH
+    vanha = kk([(1, 1, 1, 1), (2, 2, 2, 2), (3, 3, 3, 3), (4, 4, 4, 4)], vali="1min")
+    uusi = kk([(30, 30, 30, 30), (5, 5, 5, 5)], alku="2026-01-05 10:03", vali="1min")
+    m = HH.yhdista(vanha, uusi, pd.Timestamp("2026-01-05 10:01", tz="UTC"))
+    ok("yhdistys: vanhin karsittu, keskeneräinen minuutti päivittyy, uusi lisätty",
+       list(m.close) == [2, 3, 30, 5] and m.index.is_unique and m.index.is_monotonic_increasing, list(m.close))
+
+
 def test_ei_tulevaa(kansio):
     b = smc.lue(f"{kansio}/m1_bid.csv")
     hetket = [b.index[len(b) // 2], b.index[int(len(b) * 0.8)], b.index[-200]]
@@ -232,6 +241,7 @@ if __name__ == "__main__":
     test_rakenne()
     test_fvg()
     test_kynttilakuviot()
+    test_yhdista()
     test_moottori()
     test_tarkistin()
     if len(sys.argv) > 1:

@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       kertaa:
-        description: "1 = hae kerran, 0 = päivitä 5 min välein koko arkiviikon"
+        description: "1 = hae kerran, 0 = päivitä minuutin välein koko arkiviikon"
         default: "0"
   # Viikon käynnistys su klo 22.30 UTC (ma yöllä Suomen aikaa) ja päivittäinen varmuusajo.
   # Työ pyörii arkipäivät yhtäjaksoisesti ja käynnistää itsensä uudelleen 6 tunnin välein.

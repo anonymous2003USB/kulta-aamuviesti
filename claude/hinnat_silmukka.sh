@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Hakee kullan kynttilät 5 minuutin välein ja julkaisee ne haaraan "hinnat" (vain viimeisin versio säilyy).
+# Hakee kullan kynttilät 1 minuutin välein (välimuistin avulla vain uudet minuutit + 60 min sekuntidataa) ja julkaisee ne haaraan "hinnat" (vain viimeisin versio säilyy).
 # Pyörii arkipäivisin yhtäjaksoisesti (ma 00.00 – la 00.00 Suomen aikaa). Haku tehdään klo 01.30–05.00
 # (Aasian avaukset) ja 07.00–23.59; muulloin odotetaan. GitHubin työ saa kestää enintään 6 h, joten
 # 5 h 40 min jälkeen työ käynnistää itsensä uudelleen. Lauantaina ja sunnuntaina työ päättyy.
@@ -13,7 +13,7 @@ ANALYYSI="$PWD/claude/smc.py"
 AJAT="$PWD/claude/ajat.py"
 
 julkaise() {
-  rm -rf /tmp/h && python "$SKRIPTI" /tmp/h || return 1
+  rm -rf /tmp/h && python "$SKRIPTI" /tmp/h --valimuisti /tmp/hv || return 1
   # Valmis analyysi ja chartit samaan haaraan: ajastetut sessiot lukevat ne datana, koodia ajamatta.
   python "$ANALYYSI" /tmp/h /tmp/h/anal > /tmp/h/anal_tuloste.txt 2>&1
   echo "paluukoodi $?" >> /tmp/h/anal_tuloste.txt
@@ -56,5 +56,5 @@ while true; do
     jatka
     exit 0
   fi
-  sleep 300
+  sleep $(( 60 - $(date +%s) % 60 ))   # seuraavan minuutin alkuun
 done
