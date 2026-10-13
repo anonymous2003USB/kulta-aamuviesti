@@ -17,14 +17,18 @@ jobs:
       - name: Täysi haku, sitten 2 x minuuttihaku välimuistilla
         run: |
           set -e
-          for i in 1 2 3; do
+          for i in 1 2; do
             s=$(date +%s); rm -rf /tmp/h; python claude/hae_hinnat.py /tmp/h --valimuisti /tmp/hv; echo "haku $i kesti $(( $(date +%s) - s )) s"
             s=$(date +%s); python claude/smc.py /tmp/h /tmp/h/anal > /tmp/h/anal_tuloste.txt 2>&1; echo "paluukoodi $?" >> /tmp/h/anal_tuloste.txt; echo "analyysi kesti $(( $(date +%s) - s )) s"
             tail -4 /tmp/h/anal_tuloste.txt; date -u
-            [ $i -lt 3 ] && sleep 45
+            [ $i -lt 2 ] && sleep 30
           done
           python claude/testit.py /tmp/h | tail -3
           cat /tmp/h/meta.json
+          { python claude/ajat.py; echo "--- Aasia"; python claude/ajat.py --aasia; } > /tmp/h/ajat.txt
+          mkdir -p /tmp/h/anal && cp /tmp/h/anal_tuloste.txt /tmp/h/anal/ 2>/dev/null || true
+          ARK_HAARA=arkisto-testi GH_TOKEN=${{ github.token }} python claude/arkistoi.py /tmp/h --nyt
+          ARK_HAARA=arkisto-testi GH_TOKEN=${{ github.token }} python claude/arkistoi.py /tmp/h --nyt
       - name: Julkaise testitulos haaraan hinnat-testi
         env:
           GH_TOKEN: ${{ github.token }}

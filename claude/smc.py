@@ -512,6 +512,7 @@ def analysoi(kansio, ulos, aika=None):
     if "S10" in R:
         piirrettavat.append(("s10", "S10", lik, 180))
     else:
+<<<<<<< HEAD
         (virheet if aika is None else huom).append(
             "sekuntidata (s10_bid.csv) puuttuu tai on liian lyhyt: sekuntichartti puuttuu")
     for nimi, n, tasot, maara in piirrettavat:
@@ -523,6 +524,24 @@ def analysoi(kansio, ulos, aika=None):
             virheet.append(f"kuva {nimi}: viimeinen kynttilä ei vastaa dataa")
     rivit.append("  ok: kuvat piirretty (alkuhetki Suomen aikaa): " +
                  ", ".join(f"{n} viimeinen {kuvat[nimi]['viimeinen']}" for nimi, n, _, _ in piirrettavat))
+=======
+        huom.append("HUOM: sekuntidata (s10_bid.csv) puuttuu tai on liian lyhyt: sekuntichartti puuttuu")
+    for nimi, n, tasot, maara in piirrettavat:
+        r = R[n]
+        try:
+            kuvat[nimi] = piirra(r["k"], r["sw"], r["tap"], r["zs"], r["fv"], tasot, bid,
+                                 f"XAU/USD {n} {hk:%d.%m. %H:%M}", f"{ulos}/{nimi}.png", maara,
+                                 "%H:%M:%S" if n == "S10" else "%d.%m %H:%M")
+        except Exception as e:  # yksittäinen puuttuva kuva ei estä analyysia (käyttäjän päätös 13.10.)
+            huom.append(f"HUOM: kuva {nimi} puuttuu ({type(e).__name__}: {e})")
+            continue
+        if abs(kuvat[nimi]["viimeinen_sulku"] - float(r["k"].close.iloc[-1])) > 1e-6:
+            virheet.append(f"kuva {nimi}: viimeinen kynttilä ei vastaa dataa")
+    rivit.append("  ok: kuvat piirretty (alkuhetki Suomen aikaa): " +
+                 ", ".join(f"{n} viimeinen {kuvat[nimi]['viimeinen']}" for nimi, n, _, _ in piirrettavat if nimi in kuvat))
+    for h in [h for h in huom if h.startswith("HUOM")]:
+        rivit.append(f"  {h}")
+>>>>>>> arkisto-ja-joustot
     if "S10" in R and nyt is not None:
         ika_s = (nyt - R["S10"]["k"].index[-1]).total_seconds() - 10
         rivit.append(f"  ok: sekuntidata, viimeinen 10 s kynttilä {R['S10']['k'].index[-1].tz_convert(HKI):%H:%M:%S}, ikä {ika_s:.0f} s")
