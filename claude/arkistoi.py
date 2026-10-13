@@ -1,4 +1,4 @@
-"""Arkistoi analyysin ja kaikki chartit pysyvästi haaraan "arkisto" kauppahetkien kohdalla.
+"""Arkistoi analyysin ja kaikki chartit pysyvästi haaraan "arkisto" kauppahetkinä ja puolen tunnin välein (7–23.30).
 
 Hinnat-haara kirjoitetaan yli minuutin välein, joten vanhat chartit katoavat. Tämä tallentaa jokaisen
 kauppahetken (ajat.txt:n [kauppa]-rivit) tilanteen kansioon arkisto/YYYY-MM-DD/HHMM/, jotta vanhoja
@@ -56,7 +56,7 @@ def arkistoi(lahde, kohde, haara):
         p = f"{lahde}/{f}"
         if os.path.exists(p):
             rivit.append(dict(path=f"{kohde}/{os.path.basename(f)}", mode="100644", type="blob",
-                              sha=blob(open(p, "rb").read())))
+                              sha=blob(kevenna(p) if p.endswith(".png") else open(p, "rb").read())))
     if not rivit:
         print("ei arkistoitavaa")
         return False
@@ -65,6 +65,24 @@ def arkistoi(lahde, kohde, haara):
     api("PATCH", f"/git/refs/heads/{haara}", dict(sha=uusi))
     print(f"arkistoitu {kohde}: {len(rivit)} tiedostoa")
     return True
+
+
+def kevenna(polku):
+    """PNG 64 värin paletiksi (noin 150 kt -> 35 kt), jotta arkisto pysyy pienenä. Virheessä alkuperäinen."""
+    try:
+        import io
+        from PIL import Image
+        b = io.BytesIO()
+        Image.open(polku).convert("RGB").convert("P", palette=Image.ADAPTIVE, colors=64).save(b, "PNG", optimize=True)
+        return b.getvalue()
+    except Exception:
+        return open(polku, "rb").read()
+
+
+def arkistohetket(ajat_txt):
+    """Kauppahetket + täydet ja puolitunnit klo 7.00–23.30 (myöhästyneet herätykset näkevät lähimmän hetken)."""
+    out = set(kauppahetket(ajat_txt)) | {f"{h:02d}:{m:02d}" for h in range(7, 24) for m in (0, 30)}
+    return sorted(out)
 
 
 def kauppahetket(ajat_txt):
@@ -86,7 +104,7 @@ def main(lahde, heti=False):
         return arkistoi(lahde, nyt.strftime("%Y-%m-%d/%H%M"), haara)
     if not os.path.exists(f"{lahde}/ajat.txt"):
         return False
-    for hm in kauppahetket(f"{lahde}/ajat.txt"):
+    for hm in arkistohetket(f"{lahde}/ajat.txt"):
         h, m = map(int, hm.split(":"))
         w = nyt.replace(hour=h, minute=m, second=0, microsecond=0)
         if timedelta(minutes=1) <= nyt - w <= timedelta(minutes=6):
