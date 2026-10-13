@@ -1,0 +1,16 @@
+claude-20261005-1800  myynti markkina suljettu      +4.17 $  päätös -  sulku -
+claude-20261006-1015  myynti markkina suljettu     -16.32 $  päätös 2026-10-06/1017  sulku -
+claude-20261006-1540  osto   markkina suljettu      -3.95 $  päätös 2026-10-06/1541  sulku -
+claude-20261007-1020  myynti markkina suljettu     +22.14 $  päätös 2026-10-07/1020  sulku -
+claude-20261007-1636  myynti markkina suljettu     -23.97 $  päätös 2026-10-07/1636  sulku -
+claude-20261008-1000  myynti markkina suljettu     -24.44 $  päätös 2026-10-08/1000  sulku -
+claude-20261009-1005  myynti markkina suljettu     +23.35 $  päätös 2026-10-09/1004  sulku -
+claude-20261009-1535  myynti markkina suljettu      -9.50 $  päätös 2026-10-09/1533  sulku 2026-10-09/2300
+claude-20261012-1832  myynti markkina suljettu      -4.46 $  päätös 2026-10-12/1832  sulku 2026-10-12/2355
+claude-20261012-1833  myynti limit    peruttu                päätös 2026-10-12/1833  sulku -
+claude-20261012-2303  myynti markkina suljettu      -2.84 $  päätös 2026-10-12/2303  sulku 2026-10-12/2355
+claude-20261013-0706  osto   limit    peruttu                päätös 2026-10-13/0706  sulku -
+claude-20261013-1002  osto   limit    peruttu                päätös 2026-10-13/1002  sulku -
+claude-20261013-1432  osto   limit    suljettu      -8.00 $  päätös 2026-10-13/1432  sulku 2026-10-13/1704
+claude-20261013-1733  osto   limit    peruttu                päätös 2026-10-13/1733  sulku -
+claude-20261013-1833  osto   markkina suljettu     -12.90 $  päätös 2026-10-13/1833  sulku 2026-10-13/2051

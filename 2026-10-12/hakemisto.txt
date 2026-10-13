@@ -1,0 +1,4 @@
+1832  bid 4166.57  kuvat d1,h4,h1,m15,m5,m1
+1833  bid 4166.27  kuvat d1,h4,h1,m15,m5,m1
+2303  bid 4168.23  kuvat d1,h4,h1,m15,m5,m1
+2355  bid 4170.38  kuvat d1,h4,h1,m15,m5,m1

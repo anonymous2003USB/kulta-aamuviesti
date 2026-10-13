@@ -1,0 +1,61 @@
+ANALYYSI 08.10.2026 10:00 Suomen aikaa (viimeisin minuutti 09:59)
+Hinta: bid 4121.52 / ask 4122.10 (spread 0.57)
+ATR (keskim. kynttilän koko): D 80.6 | H4 29.7 | H1 13.7 | M15 6.2
+
+RAKENNE (trendi = viimeisimmän murron suunta)
+  D    LASKU    viim. murrot: CHoCH alas 16.09. 00:00 @ 4282.0; BOS alas 28.09. 00:00 @ 4234.7; BOS alas 07.10. 00:00 @ 4110.6
+  H4   LASKU    viim. murrot: CHoCH ylös 02.10. 12:00 @ 4192.6; CHoCH alas 06.10. 04:00 @ 4123.0; BOS alas 07.10. 12:00 @ 4103.8
+  H1   NOUSU    viim. murrot: CHoCH ylös 06.10. 11:00 @ 4152.1; CHoCH alas 07.10. 05:00 @ 4143.3; CHoCH ylös 08.10. 04:00 @ 4126.7
+  M15  LASKU    viim. murrot: CHoCH ylös 07.10. 19:00 @ 4108.6; BOS ylös 08.10. 03:45 @ 4114.1; CHoCH alas 08.10. 08:15 @ 4128.2
+  M5   NOUSU    viim. murrot: BOS alas 08.10. 08:20 @ 4130.7; BOS alas 08.10. 09:30 @ 4115.8; CHoCH ylös 08.10. 09:40 @ 4122.2
+  M1   LASKU    viim. murrot: BOS alas 08.10. 09:19 @ 4119.2; CHoCH ylös 08.10. 09:40 @ 4117.8; CHoCH alas 08.10. 09:59 @ 4121.9
+
+VYÖHYKKEET (voimassa, lähimmät ensin; käynnit = montako kertaa hinta palannut, 3+ = kulunut, ei näytetä)
+  Kysyntä (alapuolella):
+    M15 4105.3–4110.7 (08.10. 03:30, BOS, voimakas lähtö, käynnit 0) 10.8 $ päässä
+    H1  4100.1–4110.3 (07.10. 22:00, CHoCH, voimakas lähtö, käynnit 0) 11.2 $ päässä
+    H1  4065.1–4076.7 (05.08. 02:00, BOS, voimakas lähtö, käynnit 1) 44.8 $ päässä
+    H4  4018.9–4053.4 (03.08. 16:00, BOS, käynnit 0) 68.1 $ päässä
+    H1  3995.7–4010.0 (29.07. 17:00, CHoCH, voimakas lähtö, käynnit 0) 111.6 $ päässä
+    H1  3963.9–3995.3 (17.07. 15:00, CHoCH, voimakas lähtö, käynnit 1, LEVEÄ) 126.2 $ päässä
+  Tarjonta (yläpuolella):
+    M15 4136.1–4141.8 (08.10. 07:00, CHoCH, voimakas lähtö, käynnit 0) 14.6 $ päässä
+    M15 4142.1–4146.4 (07.10. 06:30, BOS, voimakas lähtö, käynnit 1) 20.6 $ päässä
+    H4  4156.3–4184.1 (06.10. 20:00, BOS, voimakas lähtö, käynnit 0) 34.8 $ päässä
+    H1  4164.0–4176.6 (06.10. 21:00, CHoCH, voimakas lähtö, käynnit 0) 42.5 $ päässä
+    M15 4164.9–4169.9 (07.10. 02:15, CHoCH, käynnit 0) 43.3 $ päässä
+    M15 4172.9–4179.5 (06.10. 15:00, CHoCH, voimakas lähtö, käynnit 1) 51.4 $ päässä
+
+FVG (täyttämättömät aukot, H1 ja M15)
+    H1  laskeva 4156.0–4162.2 (07.10. 04:00)
+    H1  laskeva 4149.0–4155.3 (07.10. 05:00)
+    H1  nouseva 4114.1–4116.0 (08.10. 04:00, osittain täytetty)
+    H1  laskeva 4126.7–4130.7 (08.10. 09:00)
+    M15 laskeva 4147.5–4149.2 (07.10. 05:00, osittain täytetty)
+    M15 nouseva 4110.7–4116.0 (08.10. 04:00, osittain täytetty)
+    M15 laskeva 4135.3–4136.1 (08.10. 07:30, osittain täytetty)
+    M15 laskeva 4126.8–4127.7 (08.10. 08:45)
+
+PRICE ACTION (kynttiläkuviot viimeisissä suljetuissa kynttilöissä; POI = vyöhyke tai FVG samaan suuntaan)
+    M15 08.10. 09:15 laskeva nielevä
+    M15 08.10. 09:30 nouseva nielevä, POI:lla (H1 FVG 4114.1–4116.0)
+    M5  08.10. 09:45 nouseva pin bar
+
+LIKVIDITEETTI (stoppien kasaumat)
+    Ed. viikon huippu          4280.2  ei pyyhkäisty
+    Tasaiset huiput (M15)      4170.4  ei pyyhkäisty
+    PDH (eilisen huippu)       4169.9  ei pyyhkäisty
+    Tasaiset huiput (M15)      4149.0  ei pyyhkäisty
+    Aasian huippu              4143.3  ei pyyhkäisty
+    Tasaiset huiput (M15)      4139.3  pyyhkäisty 08.10. 05:16 ja sulki takaisin
+    Tasaiset pohjat (M15)      4128.1  pyyhkäisty 08.10. 08:26 ja sulki takaisin
+    Ed. viikon pohja           4110.6  pyyhkäisty 06.10. 05:35 ja sulki takaisin
+    Aasian pohja               4105.3  ei pyyhkäisty
+    Tasaiset pohjat (M15)      4102.9  ei pyyhkäisty
+    PDL (eilisen pohja)        4065.5  ei pyyhkäisty
+  Tämän päivän (NY-päivä) alue: 4102.9–4143.3
+
+TARKISTUS
+  ok: H1 vs M1 suurin ero 0.00 $ (53 tuntia)
+  ok: kuvat piirretty (alkuhetki Suomen aikaa): D viimeinen 07.10. 00:00:00, H4 viimeinen 08.10. 04:00:00, H1 viimeinen 08.10. 09:00:00, M15 viimeinen 08.10. 09:45:00, M5 viimeinen 08.10. 09:55:00, M1 viimeinen 08.10. 09:59:00
+  KATSO KAIKKI KUVAT ennen päätöstä: d1.png, h4.png, h1.png, m15.png, m5.png, m1.png, s10.png

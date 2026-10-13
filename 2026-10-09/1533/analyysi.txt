@@ -1,0 +1,62 @@
+ANALYYSI 09.10.2026 15:33 Suomen aikaa (viimeisin minuutti 15:32)
+Hinta: bid 4186.27 / ask 4186.85 (spread 0.58)
+ATR (keskim. kynttilän koko): D 79.0 | H4 28.2 | H1 12.3 | M15 4.6
+
+RAKENNE (trendi = viimeisimmän murron suunta)
+  D    LASKU    viim. murrot: CHoCH alas 16.09. 00:00 @ 4282.0; BOS alas 28.09. 00:00 @ 4234.7; BOS alas 07.10. 00:00 @ 4110.6
+  H4   NOUSU    viim. murrot: CHoCH alas 06.10. 04:00 @ 4123.0; BOS alas 07.10. 12:00 @ 4103.8; CHoCH ylös 09.10. 04:00 @ 4143.3
+  H1   NOUSU    viim. murrot: CHoCH alas 07.10. 05:00 @ 4143.3; CHoCH ylös 08.10. 04:00 @ 4126.7; BOS ylös 09.10. 04:00 @ 4145.8
+  M15  LASKU    viim. murrot: BOS ylös 09.10. 07:15 @ 4180.0; CHoCH alas 09.10. 11:45 @ 4189.6; BOS alas 09.10. 13:30 @ 4182.6
+  M5   NOUSU    viim. murrot: CHoCH alas 09.10. 11:45 @ 4189.6; BOS alas 09.10. 13:30 @ 4182.7; CHoCH ylös 09.10. 14:25 @ 4183.3
+  M1   NOUSU    viim. murrot: CHoCH ylös 09.10. 15:00 @ 4183.6; CHoCH alas 09.10. 15:16 @ 4181.3; CHoCH ylös 09.10. 15:30 @ 4185.4
+
+VYÖHYKKEET (voimassa, lähimmät ensin; käynnit = montako kertaa hinta palannut, 3+ = kulunut, ei näytetä)
+  Kysyntä (alapuolella):
+    M15 4173.3–4178.4 (09.10. 06:00, BOS, voimakas lähtö, käynnit 2) 7.9 $ päässä
+    M15 4141.2–4149.1 (09.10. 03:15, BOS, voimakas lähtö, käynnit 0, LEVEÄ) 37.2 $ päässä
+    M15 4130.3–4135.7 (09.10. 01:00, CHoCH, voimakas lähtö, käynnit 1) 50.6 $ päässä
+    H1  4120.9–4134.1 (08.10. 21:00, BOS, voimakas lähtö, käynnit 0) 52.2 $ päässä
+    H4  4109.7–4131.9 (08.10. 12:00, CHoCH, voimakas lähtö, käynnit 0) 54.4 $ päässä
+    M15 4105.3–4110.7 (08.10. 03:30, BOS, voimakas lähtö, käynnit 2) 75.6 $ päässä
+  Tarjonta (yläpuolella):
+    M15 4184.3–4189.6 (09.10. 12:15, BOS, käynnit 2) HINTA VYÖHYKKEELLÄ
+    M15 4194.9–4201.6 (09.10. 11:15, CHoCH, voimakas lähtö, käynnit 0) 8.6 $ päässä
+    H1  4269.8–4291.1 (25.09. 18:00, CHoCH, voimakas lähtö, käynnit 0, LEVEÄ) 83.5 $ päässä
+    H4  4289.3–4315.5 (25.09. 12:00, BOS, voimakas lähtö, käynnit 0) 103.1 $ päässä
+    H4  4334.4–4371.0 (22.09. 20:00, CHoCH, voimakas lähtö, käynnit 0) 148.1 $ päässä
+    H1  4353.0–4371.0 (22.09. 22:00, CHoCH, voimakas lähtö, käynnit 0) 166.7 $ päässä
+
+FVG (täyttämättömät aukot, H1 ja M15)
+    H1  laskeva 4280.2–4287.3 (28.09. 01:00)
+    H1  laskeva 4265.6–4282.3 (28.09. 02:00)
+    H1  laskeva 4231.4–4255.9 (28.09. 04:00)
+    H1  nouseva 4150.3–4169.5 (09.10. 05:00)
+    M15 nouseva 4156.2–4161.2 (09.10. 04:30)
+    M15 nouseva 4163.5–4169.0 (09.10. 04:45)
+    M15 nouseva 4172.8–4174.5 (09.10. 05:45, osittain täytetty)
+    M15 laskeva 4191.5–4194.9 (09.10. 11:45)
+
+PRICE ACTION (kynttiläkuviot viimeisissä suljetuissa kynttilöissä; POI = vyöhyke tai FVG samaan suuntaan)
+    M15 09.10. 14:45 neutraali sisäpäivä
+    M15 09.10. 15:00 laskeva pin bar, POI:lla (M15 tarjonta 4184.3–4189.6)
+    M5  09.10. 15:20 nouseva nielevä
+
+LIKVIDITEETTI (stoppien kasaumat)
+    Ed. viikon huippu          4280.2  ei pyyhkäisty
+    Aasian huippu              4207.3  ei pyyhkäisty
+    Tasaiset pohjat (M15)      4189.1  pyyhkäisty 09.10. 11:49
+    Tasaiset huiput (M15)      4170.4  pyyhkäisty 09.10. 04:37 ja sulki takaisin
+    Tasaiset huiput (M15)      4149.0  pyyhkäisty 09.10. 03:07
+    PDH (eilisen huippu)       4145.8  pyyhkäisty 09.10. 03:00
+    Aasian pohja               4141.2  ei pyyhkäisty
+    Tasaiset huiput (M15)      4140.5  pyyhkäisty 08.10. 20:17
+    Tasaiset pohjat (M15)      4113.1  pyyhkäisty 08.10. 18:15 ja sulki takaisin
+    Ed. viikon pohja           4110.6  pyyhkäisty 06.10. 05:35 ja sulki takaisin
+    Tasaiset pohjat (M15)      4108.9  pyyhkäisty 08.10. 19:01
+    PDL (eilisen pohja)        4102.9  ei pyyhkäisty
+  Tämän päivän (NY-päivä) alue: 4130.3–4207.3
+
+TARKISTUS
+  ok: H1 vs M1 suurin ero 0.00 $ (82 tuntia)
+  ok: kuvat piirretty (alkuhetki Suomen aikaa): D viimeinen 08.10. 00:00:00, H4 viimeinen 09.10. 08:00:00, H1 viimeinen 09.10. 14:00:00, M15 viimeinen 09.10. 15:15:00, M5 viimeinen 09.10. 15:25:00, M1 viimeinen 09.10. 15:32:00
+  KATSO KAIKKI KUVAT ennen päätöstä: d1.png, h4.png, h1.png, m15.png, m5.png, m1.png, s10.png

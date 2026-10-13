@@ -1,0 +1,291 @@
+{
+ "aika_hki": "2026-10-08 10:00",
+ "viimeinen_minuutti_utc": "2026-10-08T06:59:00+00:00",
+ "bid": 4121.525,
+ "ask": 4122.095,
+ "atr": {
+  "D": 80.57,
+  "H4": 29.66,
+  "H1": 13.7,
+  "M15": 6.16,
+  "M5": 4.12,
+  "M1": 1.54
+ },
+ "trendi": {
+  "D": -1,
+  "H4": -1,
+  "H1": 1,
+  "M15": -1,
+  "M5": 1,
+  "M1": -1
+ },
+ "vyohykkeet": [
+  {
+   "tf": "H4",
+   "suunta": 1,
+   "ala": 4018.915,
+   "yla": 4053.425,
+   "syntyi": "03.08. 16:00",
+   "murto": "BOS",
+   "voimakas": false,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H4",
+   "suunta": -1,
+   "ala": 4334.375,
+   "yla": 4370.955,
+   "syntyi": "22.09. 20:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H4",
+   "suunta": -1,
+   "ala": 4289.335,
+   "yla": 4315.545,
+   "syntyi": "25.09. 12:00",
+   "murto": "BOS",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H4",
+   "suunta": -1,
+   "ala": 4156.325,
+   "yla": 4184.135,
+   "syntyi": "06.10. 20:00",
+   "murto": "BOS",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H1",
+   "suunta": 1,
+   "ala": 3963.885,
+   "yla": 3995.285,
+   "syntyi": "17.07. 15:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 1
+  },
+  {
+   "tf": "H1",
+   "suunta": 1,
+   "ala": 3995.655,
+   "yla": 4009.955,
+   "syntyi": "29.07. 17:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H1",
+   "suunta": 1,
+   "ala": 4065.065,
+   "yla": 4076.675,
+   "syntyi": "05.08. 02:00",
+   "murto": "BOS",
+   "voimakas": true,
+   "kaynnit": 1
+  },
+  {
+   "tf": "H1",
+   "suunta": -1,
+   "ala": 4352.955,
+   "yla": 4370.955,
+   "syntyi": "22.09. 22:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H1",
+   "suunta": -1,
+   "ala": 4269.805,
+   "yla": 4291.115,
+   "syntyi": "25.09. 18:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H1",
+   "suunta": -1,
+   "ala": 4164.045,
+   "yla": 4176.595,
+   "syntyi": "06.10. 21:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "H1",
+   "suunta": 1,
+   "ala": 4100.125,
+   "yla": 4110.295,
+   "syntyi": "07.10. 22:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "M15",
+   "suunta": -1,
+   "ala": 4172.935,
+   "yla": 4179.465,
+   "syntyi": "06.10. 15:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 1
+  },
+  {
+   "tf": "M15",
+   "suunta": -1,
+   "ala": 4164.855,
+   "yla": 4169.885,
+   "syntyi": "07.10. 02:15",
+   "murto": "CHoCH",
+   "voimakas": false,
+   "kaynnit": 0
+  },
+  {
+   "tf": "M15",
+   "suunta": -1,
+   "ala": 4142.135,
+   "yla": 4146.395,
+   "syntyi": "07.10. 06:30",
+   "murto": "BOS",
+   "voimakas": true,
+   "kaynnit": 1
+  },
+  {
+   "tf": "M15",
+   "suunta": 1,
+   "ala": 4105.275,
+   "yla": 4110.675,
+   "syntyi": "08.10. 03:30",
+   "murto": "BOS",
+   "voimakas": true,
+   "kaynnit": 0
+  },
+  {
+   "tf": "M15",
+   "suunta": -1,
+   "ala": 4136.125,
+   "yla": 4141.765,
+   "syntyi": "08.10. 07:00",
+   "murto": "CHoCH",
+   "voimakas": true,
+   "kaynnit": 0
+  }
+ ],
+ "likviditeetti": [
+  {
+   "nimi": "PDH (eilisen huippu)",
+   "taso": 4169.885,
+   "ylos": true,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "PDL (eilisen pohja)",
+   "taso": 4065.545,
+   "ylos": false,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "Ed. viikon huippu",
+   "taso": 4280.175,
+   "ylos": true,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "Ed. viikon pohja",
+   "taso": 4110.585,
+   "ylos": false,
+   "pyyhkaisty": "06.10. 05:35",
+   "sulki_takaisin": true
+  },
+  {
+   "nimi": "Aasian huippu",
+   "taso": 4143.305,
+   "ylos": true,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "Aasian pohja",
+   "taso": 4105.275,
+   "ylos": false,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "Tasaiset huiput (M15)",
+   "taso": 4139.295,
+   "ylos": true,
+   "pyyhkaisty": "08.10. 05:16",
+   "sulki_takaisin": true
+  },
+  {
+   "nimi": "Tasaiset huiput (M15)",
+   "taso": 4149.005,
+   "ylos": true,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "Tasaiset huiput (M15)",
+   "taso": 4170.365,
+   "ylos": true,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  },
+  {
+   "nimi": "Tasaiset pohjat (M15)",
+   "taso": 4128.065,
+   "ylos": false,
+   "pyyhkaisty": "08.10. 08:26",
+   "sulki_takaisin": true
+  },
+  {
+   "nimi": "Tasaiset pohjat (M15)",
+   "taso": 4102.865,
+   "ylos": false,
+   "pyyhkaisty": null,
+   "sulki_takaisin": false
+  }
+ ],
+ "price_action": [
+  {
+   "tf": "M15",
+   "aika": "08.10. 09:15",
+   "kuvio": "nielevä",
+   "suunta": -1,
+   "poi": false
+  },
+  {
+   "tf": "M15",
+   "aika": "08.10. 09:30",
+   "kuvio": "nielevä",
+   "suunta": 1,
+   "poi": true
+  },
+  {
+   "tf": "M5",
+   "aika": "08.10. 09:45",
+   "kuvio": "pin bar",
+   "suunta": 1,
+   "poi": false
+  }
+ ],
+ "virheet": [],
+ "huomiot": [
+  "H1 vs M1 suurin ero 0.00 $ (53 tuntia)",
+  "HUOM: sekuntidata (s10_bid.csv) puuttuu tai on liian lyhyt: sekuntichartti puuttuu (kauppa sallittu muiden aikatasojen perusteella)"
+ ]
+}
