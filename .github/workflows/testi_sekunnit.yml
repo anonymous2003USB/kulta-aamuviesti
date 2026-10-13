@@ -1,0 +1,32 @@
+name: Testi sekunnit
+on:
+  push:
+    branches: [testi-sekunnit]
+permissions:
+  contents: write
+jobs:
+  testi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install dukascopy-python pandas matplotlib
+      - name: Täysi haku, sitten 2 x minuuttihaku välimuistilla
+        run: |
+          set -e
+          for i in 1 2 3; do
+            s=$(date +%s); rm -rf /tmp/h; python claude/hae_hinnat.py /tmp/h --valimuisti /tmp/hv; echo "haku $i kesti $(( $(date +%s) - s )) s"
+            s=$(date +%s); python claude/smc.py /tmp/h /tmp/h/anal > /tmp/h/anal_tuloste.txt 2>&1; echo "paluukoodi $?" >> /tmp/h/anal_tuloste.txt; echo "analyysi kesti $(( $(date +%s) - s )) s"
+            tail -4 /tmp/h/anal_tuloste.txt; date -u
+            [ $i -lt 3 ] && sleep 45
+          done
+          python claude/testit.py /tmp/h | tail -3
+          cat /tmp/h/meta.json
+      - name: Julkaise testitulos haaraan hinnat-testi
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd /tmp/h && git init -q -b hinnat-testi && git add . && git -c user.name=bot -c user.email=bot@example.com commit -qm testi && git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" hinnat-testi
