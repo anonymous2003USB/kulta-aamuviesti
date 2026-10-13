@@ -1,0 +1,65 @@
+ANALYYSI 13.10.2026 20:01 Suomen aikaa (viimeisin minuutti 20:00)
+Hinta: bid 4151.09 / ask 4151.55 (spread 0.47) – sekuntidatasta
+ATR (keskim. kynttilän koko): D 78.6 | H4 23.0 | H1 11.1 | M15 6.6
+
+RAKENNE (trendi = viimeisimmän murron suunta)
+  D    LASKU    viim. murrot: CHoCH alas 16.09. 00:00 @ 4282.0; BOS alas 28.09. 00:00 @ 4234.7; BOS alas 07.10. 00:00 @ 4110.6
+  H4   NOUSU    viim. murrot: BOS alas 07.10. 12:00 @ 4103.8; CHoCH ylös 09.10. 04:00 @ 4143.3; BOS ylös 12.10. 00:00 @ 4207.3
+  H1   NOUSU    viim. murrot: BOS ylös 12.10. 03:00 @ 4202.0; CHoCH alas 12.10. 10:00 @ 4183.5; CHoCH ylös 13.10. 05:00 @ 4176.2
+  M15  LASKU    viim. murrot: CHoCH alas 13.10. 12:15 @ 4183.3; BOS alas 13.10. 15:45 @ 4179.5; BOS alas 13.10. 18:15 @ 4162.7
+  M5   LASKU    viim. murrot: BOS alas 13.10. 16:55 @ 4172.6; BOS alas 13.10. 18:25 @ 4162.7; BOS alas 13.10. 19:50 @ 4155.3
+  M1   LASKU    viim. murrot: CHoCH ylös 13.10. 19:38 @ 4158.3; CHoCH alas 13.10. 19:50 @ 4156.2; BOS alas 13.10. 19:57 @ 4153.9
+  S10  LASKU    viim. murrot: CHoCH alas 13.10. 19:56 @ 4155.0; BOS alas 13.10. 19:57 @ 4154.5; BOS alas 13.10. 20:00 @ 4152.1
+
+VYÖHYKKEET (voimassa, lähimmät ensin; käynnit = montako kertaa hinta palannut, 3+ = kulunut, ei näytetä)
+  Kysyntä (alapuolella):
+    M15 4141.2–4149.1 (09.10. 03:15, BOS, voimakas lähtö, käynnit 0) 2.0 $ päässä
+    M15 4130.3–4135.7 (09.10. 01:00, CHoCH, käynnit 1) 15.4 $ päässä
+    H1  4120.9–4134.1 (08.10. 21:00, BOS, voimakas lähtö, käynnit 0) 17.0 $ päässä
+    H4  4109.7–4131.9 (08.10. 12:00, CHoCH, voimakas lähtö, käynnit 0) 19.2 $ päässä
+    M15 4105.3–4110.7 (08.10. 03:30, BOS, voimakas lähtö, käynnit 2) 40.4 $ päässä
+    H1  4100.1–4110.3 (07.10. 22:00, CHoCH, voimakas lähtö, käynnit 2) 40.8 $ päässä
+  Tarjonta (yläpuolella):
+    M15 4164.6–4170.2 (13.10. 17:30, BOS, käynnit 0) 13.5 $ päässä
+    H1  4200.0–4216.9 (12.10. 04:00, CHoCH, voimakas lähtö, käynnit 1, LEVEÄ) 48.9 $ päässä
+    M15 4207.3–4214.2 (12.10. 05:00, CHoCH, voimakas lähtö, käynnit 0) 56.2 $ päässä
+    H1  4269.8–4291.1 (25.09. 18:00, CHoCH, voimakas lähtö, käynnit 0, LEVEÄ) 118.7 $ päässä
+    H4  4289.3–4315.5 (25.09. 12:00, BOS, voimakas lähtö, käynnit 0) 138.2 $ päässä
+    H4  4334.4–4371.0 (22.09. 20:00, CHoCH, voimakas lähtö, käynnit 0, LEVEÄ) 183.3 $ päässä
+
+FVG (täyttämättömät aukot, H1 ja M15)
+    H1  nouseva 4150.3–4169.5 (09.10. 05:00, osittain täytetty)
+    H1  laskeva 4195.7–4201.2 (12.10. 08:00, osittain täytetty)
+    H1  laskeva 4173.1–4177.3 (13.10. 17:00)
+    H1  laskeva 4160.6–4162.7 (13.10. 19:00)
+    M15 nouseva 4148.6–4155.5 (09.10. 04:15, osittain täytetty)
+    M15 laskeva 4209.1–4210.2 (12.10. 05:45)
+    M15 laskeva 4201.0–4202.4 (12.10. 07:15)
+    M15 laskeva 4172.7–4175.8 (13.10. 17:00, osittain täytetty)
+
+PRICE ACTION (kynttiläkuviot viimeisissä suljetuissa kynttilöissä; POI = vyöhyke tai FVG samaan suuntaan)
+    M15 13.10. 19:15 laskeva nielevä, POI:lla (H1 FVG 4160.6–4162.7)
+    M15 13.10. 19:30 laskeva pin bar
+
+LIKVIDITEETTI (stoppien kasaumat)
+    PDH (eilisen huippu)       4216.9  ei pyyhkäisty
+    Ed. viikon huippu          4207.3  pyyhkäisty 12.10. 03:14 ja sulki takaisin
+    Aasian huippu              4200.2  ei pyyhkäisty
+    Tasaiset pohjat (M15)      4183.5  pyyhkäisty 13.10. 10:44 ja sulki takaisin
+    Tasaiset pohjat (M15)      4179.1  pyyhkäisty 13.10. 15:54
+    Tasaiset huiput (M15)      4176.2  pyyhkäisty 13.10. 05:56
+    Tasaiset huiput (M15)      4173.0  pyyhkäisty 13.10. 01:00
+    Tasaiset huiput (M15)      4170.7  pyyhkäisty 13.10. 05:24
+    Tasaiset pohjat (M15)      4162.7  pyyhkäisty 13.10. 18:28
+    PDL (eilisen pohja)        4154.4  pyyhkäisty 13.10. 03:55 ja sulki takaisin
+    Aasian pohja               4150.5  pyyhkäisty 13.10. 20:00 ja sulki takaisin
+    Ed. viikon pohja           4065.5  ei pyyhkäisty
+  Tämän päivän (NY-päivä) alue: 4150.1–4200.2
+
+TARKISTUS
+  ok: H1 vs M1 suurin ero 0.00 $ (136 tuntia)
+  ok: datan ikä 1 min
+  ok: kuvat piirretty (alkuhetki Suomen aikaa): D viimeinen 12.10. 00:00:00, H4 viimeinen 13.10. 16:00:00, H1 viimeinen 13.10. 19:00:00, M15 viimeinen 13.10. 19:45:00, M5 viimeinen 13.10. 19:55:00, M1 viimeinen 13.10. 20:00:00, S10 viimeinen 13.10. 20:01:20
+  ok: sekuntidata, viimeinen 10 s kynttilä 20:01:20, ikä 7 s
+  KATSO KAIKKI KUVAT ennen päätöstä: d1.png, h4.png, h1.png, m15.png, m5.png, m1.png, s10.png
+paluukoodi 0
