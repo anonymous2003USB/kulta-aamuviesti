@@ -55,6 +55,26 @@ def test_fvg():
     ok("FVG osittain täytetty (low 103)", bool(nous) and nous[0]["osittain"] and not nous[0]["taytetty"])
 
 
+def test_kynttilakuviot():
+    # 0: laskeva 105->102, 1: nouseva 101->106 nielee rungon 102–105 -> nouseva nielevä
+    k = kk([(104, 104, 104, 104), (105, 105.5, 101.5, 102), (101, 106.5, 100.5, 106)])
+    x = smc.kynttilakuviot(k, 4.0)
+    ok("nouseva nielevä tunnistetaan", any(e["kuvio"] == "nielevä" and e["suunta"] == 1 and e["i"] == 2 for e in x), x)
+    # pin bar: runko 100–100.5, alavarjo 94 asti (6 $), yläreuna 101, ATR 4 -> nouseva pin bar
+    k2 = kk([(100, 102, 98, 101), (100, 101, 94, 100.5)])
+    x2 = smc.kynttilakuviot(k2, 4.0)
+    ok("nouseva pin bar tunnistetaan", any(e["kuvio"] == "pin bar" and e["suunta"] == 1 for e in x2), x2)
+    ok("pin bar ei ole nielevä", not any(e["kuvio"] == "nielevä" for e in x2), x2)
+    # laskeva pin bar: yläpuolinen varjo
+    k3 = kk([(100, 102, 98, 101), (100.5, 106, 99.5, 100)])
+    x3 = smc.kynttilakuviot(k3, 4.0)
+    ok("laskeva pin bar tunnistetaan", any(e["kuvio"] == "pin bar" and e["suunta"] == -1 for e in x3), x3)
+    # liian pieni kynttilä (koko 1 < 0.5 x ATR 4) ei ole pin bar
+    k4 = kk([(100, 102, 98, 101), (100, 100.1, 99, 100.05)])
+    ok("pieni kynttilä ei ole pin bar", not any(e["kuvio"] == "pin bar" for e in smc.kynttilakuviot(k4, 4.0)))
+    ok("sisäpäivä tunnistetaan", any(e["kuvio"] == "sisäpäivä" for e in smc.kynttilakuviot(k4, 4.0)))
+
+
 def test_ei_tulevaa(kansio):
     b = smc.lue(f"{kansio}/m1_bid.csv")
     hetket = [b.index[len(b) // 2], b.index[int(len(b) * 0.8)], b.index[-200]]
@@ -211,6 +231,7 @@ def test_pieni_vastaa_moottoria(kansio):
 if __name__ == "__main__":
     test_rakenne()
     test_fvg()
+    test_kynttilakuviot()
     test_moottori()
     test_tarkistin()
     if len(sys.argv) > 1:

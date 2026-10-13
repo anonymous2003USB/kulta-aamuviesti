@@ -166,6 +166,31 @@ def vyohykkeet(k, tap, fv, a):
 
 # ---------------------------------------------------------------- likviditeetti
 
+def kynttilakuviot(k, a, n=3):
+    """Price action -kuviot viimeisistä n suljetusta kynttilästä.
+    nielevä: runko nielee edellisen vastakkaisvärisen rungon kokonaan;
+    pin bar: varjo >= 2 x runko ja >= 60 % koko kynttilästä, kynttilä >= 0,5 x ATR;
+    sisäpäivä: huippu ja pohja edellisen sisällä. Palauttaa listan {i, kuvio, suunta}."""
+    out = []
+    o, h, l, c = (k[x].values for x in ("open", "high", "low", "close"))
+    for i in range(max(1, len(k) - n), len(k)):
+        runko, koko = abs(c[i] - o[i]), h[i] - l[i]
+        ala_v, yla_v = min(o[i], c[i]) - l[i], h[i] - max(o[i], c[i])
+        e_runko = abs(c[i - 1] - o[i - 1])
+        if c[i] > o[i] and c[i - 1] < o[i - 1] and c[i] >= o[i - 1] and o[i] <= c[i - 1] and runko > e_runko:
+            out.append(dict(i=i, kuvio="nielevä", suunta=1))
+        elif c[i] < o[i] and c[i - 1] > o[i - 1] and c[i] <= o[i - 1] and o[i] >= c[i - 1] and runko > e_runko:
+            out.append(dict(i=i, kuvio="nielevä", suunta=-1))
+        if koko >= 0.5 * a and koko > 0:
+            if ala_v >= 2 * runko and ala_v >= 0.6 * koko:
+                out.append(dict(i=i, kuvio="pin bar", suunta=1))
+            elif yla_v >= 2 * runko and yla_v >= 0.6 * koko:
+                out.append(dict(i=i, kuvio="pin bar", suunta=-1))
+        if h[i] < h[i - 1] and l[i] > l[i - 1]:
+            out.append(dict(i=i, kuvio="sisäpäivä", suunta=0))
+    return out
+
+
 def pyyhkaisy(k_jalk, taso, ylos):
     """Onko taso ylitetty (ylos) / alitettu myöhemmin. Palauttaa (aika tai None, sulkiko takaisin)."""
     x = k_jalk.high > taso if ylos else k_jalk.low < taso
@@ -383,20 +408,6 @@ def analysoi(kansio, ulos, aika=None):
         zs = vyohykkeet(k, tap, fv, a_)
         R[nimi] = dict(k=k, atr=a_, trendi=tr, tap=tap, sw=sw, fv=fv, zs=zs)
 
-    # premium/discount H4- ja H1-alueella
-    def alue(nimi):
-        r = R[nimi]
-        k, sw = r["k"], r["sw"]
-        n = SWING_N[nimi]
-        hs = [s for s in sw if s[1] == "H" and s[0] + n < len(k)]
-        ls = [s for s in sw if s[1] == "L" and s[0] + n < len(k)]
-        if not hs or not ls:
-            return None
-        hi_i, lo_i = hs[-1][0], ls[-1][0]
-        hi = max(hs[-1][2], float(k.high.iloc[hi_i:].max()))
-        lo = min(ls[-1][2], float(k.low.iloc[lo_i:].min()))
-        return dict(ala=lo, yla=hi, sijainti=round((bid - lo) / (hi - lo) * 100) if hi > lo else None)
-
     lik, tanaan = likviditeetti(b, d1, R["H1"]["sw"], h1, m15, R["M15"]["sw"], t, R["H1"]["atr"])
 
     def aikaf(k, i):
@@ -416,11 +427,6 @@ def analysoi(kansio, ulos, aika=None):
         kuvaus = "; ".join(f"{e['tyyppi']} {'ylös' if e['suunta'] == 1 else 'alas'} {aikaf(r['k'], e['j'])} @ {e['taso']:.1f}"
                            for e in viim)
         rivit.append(f"  {n:4s} {sanat[r['trendi']]:8s} viim. murrot: {kuvaus or '-'}")
-    for n in ("H4", "H1"):
-        al = alue(n)
-        if al:
-            pd_ = "PREMIUM (kallis, myyntialue)" if al["sijainti"] > 50 else "DISCOUNT (halpa, ostoalue)"
-            rivit.append(f"  {n}-alue {al['ala']:.1f}–{al['yla']:.1f}: hinta {al['sijainti']} % -> {pd_}")
     rivit.append("")
     rivit.append("VYÖHYKKEET (voimassa, lähimmät ensin; käynnit = montako kertaa hinta palannut, 3+ = kulunut, ei näytetä)")
     zt = []
@@ -451,6 +457,23 @@ def analysoi(kansio, ulos, aika=None):
         for f in av:
             rivit.append(f"    {n:3s} {'nouseva' if f['suunta'] == 1 else 'laskeva'} {f['ala']:.1f}–{f['yla']:.1f} "
                          f"({aikaf(r['k'], f['i'])}{', osittain täytetty' if f['osittain'] else ''})")
+    rivit.append("")
+    rivit.append("PRICE ACTION (kynttiläkuviot viimeisissä suljetuissa kynttilöissä; POI = vyöhyke tai FVG samaan suuntaan)")
+    poit = [(n, z["ala"], z["yla"], z["suunta"], "kysyntä" if z["suunta"] == 1 else "tarjonta") for n, z, _, _ in zt]
+    for n in ("H1", "M15"):
+        poit += [(n, f["ala"], f["yla"], f["suunta"], "FVG") for f in R[n]["fv"] if not f["taytetty"]]
+    pa = []
+    for n in ("M15", "M5"):
+        k = R[n]["k"]
+        for x in kynttilakuviot(k, R[n]["atr"]):
+            lo, hi = float(k.low.iloc[x["i"]]), float(k.high.iloc[x["i"]])
+            osuu = [p for p in poit if x["suunta"] != 0 and p[3] == x["suunta"] and lo <= p[2] and hi >= p[1]]
+            poi = f", POI:lla ({osuu[0][0]} {osuu[0][4]} {osuu[0][1]:.1f}–{osuu[0][2]:.1f})" if osuu else ""
+            suunta = {1: "nouseva", -1: "laskeva", 0: "neutraali"}[x["suunta"]]
+            rivit.append(f"    {n:3s} {aikaf(k, x['i'])} {suunta} {x['kuvio']}{poi}")
+            pa.append(dict(tf=n, aika=aikaf(k, x["i"]), kuvio=x["kuvio"], suunta=x["suunta"], poi=bool(osuu)))
+    if not pa:
+        rivit.append("    - (ei kuvioita viimeisissä kynttilöissä)")
     rivit.append("")
     rivit.append("LIKVIDITEETTI (stoppien kasaumat)")
     for o in sorted(lik, key=lambda o: -o["taso"]):
@@ -484,10 +507,9 @@ def analysoi(kansio, ulos, aika=None):
     open(f"{ulos}/analyysi.txt", "w").write(teksti)
     js = dict(aika_hki=hk.strftime("%Y-%m-%d %H:%M"), viimeinen_minuutti_utc=b.index[-1].isoformat(), bid=bid, ask=ask,
               atr={n: round(R[n]["atr"], 2) for n in R}, trendi={n: R[n]["trendi"] for n in R},
-              alueet={n: alue(n) for n in ("H4", "H1")},
               vyohykkeet=[dict(tf=n, suunta=z["suunta"], ala=z["ala"], yla=z["yla"], syntyi=ai, murto=z["murto"],
                                voimakas=z["siirtyma"], kaynnit=z["kaynnit"]) for n, z, _, ai in zt],
-              likviditeetti=[{k_: v for k_, v in o.items() if k_ != "alku"} for o in lik],
+              likviditeetti=[{k_: v for k_, v in o.items() if k_ != "alku"} for o in lik], price_action=pa,
               virheet=virheet, huomiot=huom)
     json.dump(js, open(f"{ulos}/analyysi.json", "w"), ensure_ascii=False, indent=1, default=str)
     print(teksti)
