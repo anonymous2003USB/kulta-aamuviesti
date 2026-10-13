@@ -1,0 +1,2 @@
+Clauden kauppahetkien analyysit ja chartit: YYYY-MM-DD/HHMM/ (Suomen aikaa).
+Tiedostot: analyysi.txt, analyysi.json, meta.json, d1/h4/h1/m15/m5/m1/s10.png
