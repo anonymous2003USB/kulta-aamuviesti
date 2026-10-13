@@ -10,6 +10,11 @@ SHA=$(curl -sf "https://api.github.com/repos/$REPO/commits/hinnat" |
 for f in meta.json m1_bid.csv m1_ask.csv h1_bid.csv; do
   curl -sSf -o "$K/$f" "https://raw.githubusercontent.com/$REPO/$SHA/$f"
 done
+# valmis analyysi ja chartit (GitHub Actions tekee ne jokaisen haun yhteydessä)
+mkdir -p "$K/anal"
+for f in s10_bid.csv s10_ask.csv anal/analyysi.txt anal/analyysi.json anal/d1.png anal/h4.png anal/h1.png anal/m15.png anal/m5.png anal/m1.png anal/s10.png anal/analyysi_tuloste.txt ajat.txt; do
+  curl -sSf -o "$K/$f" "https://raw.githubusercontent.com/$REPO/$SHA/$f" 2>/dev/null || true
+done
 python3 - "$K" "$SHA" <<'EOF'
 import json, sys, datetime as d
 m = json.load(open(f"{sys.argv[1]}/meta.json"))

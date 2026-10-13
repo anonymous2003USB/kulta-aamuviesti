@@ -55,6 +55,35 @@ def test_fvg():
     ok("FVG osittain täytetty (low 103)", bool(nous) and nous[0]["osittain"] and not nous[0]["taytetty"])
 
 
+def test_kynttilakuviot():
+    # 0: laskeva 105->102, 1: nouseva 101->106 nielee rungon 102–105 -> nouseva nielevä
+    k = kk([(104, 104, 104, 104), (105, 105.5, 101.5, 102), (101, 106.5, 100.5, 106)])
+    x = smc.kynttilakuviot(k, 4.0)
+    ok("nouseva nielevä tunnistetaan", any(e["kuvio"] == "nielevä" and e["suunta"] == 1 and e["i"] == 2 for e in x), x)
+    # pin bar: runko 100–100.5, alavarjo 94 asti (6 $), yläreuna 101, ATR 4 -> nouseva pin bar
+    k2 = kk([(100, 102, 98, 101), (100, 101, 94, 100.5)])
+    x2 = smc.kynttilakuviot(k2, 4.0)
+    ok("nouseva pin bar tunnistetaan", any(e["kuvio"] == "pin bar" and e["suunta"] == 1 for e in x2), x2)
+    ok("pin bar ei ole nielevä", not any(e["kuvio"] == "nielevä" for e in x2), x2)
+    # laskeva pin bar: yläpuolinen varjo
+    k3 = kk([(100, 102, 98, 101), (100.5, 106, 99.5, 100)])
+    x3 = smc.kynttilakuviot(k3, 4.0)
+    ok("laskeva pin bar tunnistetaan", any(e["kuvio"] == "pin bar" and e["suunta"] == -1 for e in x3), x3)
+    # liian pieni kynttilä (koko 1 < 0.5 x ATR 4) ei ole pin bar
+    k4 = kk([(100, 102, 98, 101), (100, 100.1, 99, 100.05)])
+    ok("pieni kynttilä ei ole pin bar", not any(e["kuvio"] == "pin bar" for e in smc.kynttilakuviot(k4, 4.0)))
+    ok("sisäpäivä tunnistetaan", any(e["kuvio"] == "sisäpäivä" for e in smc.kynttilakuviot(k4, 4.0)))
+
+
+def test_yhdista():
+    import hae_hinnat as HH
+    vanha = kk([(1, 1, 1, 1), (2, 2, 2, 2), (3, 3, 3, 3), (4, 4, 4, 4)], vali="1min")
+    uusi = kk([(30, 30, 30, 30), (5, 5, 5, 5)], alku="2026-01-05 10:03", vali="1min")
+    m = HH.yhdista(vanha, uusi, pd.Timestamp("2026-01-05 10:01", tz="UTC"))
+    ok("yhdistys: vanhin karsittu, keskeneräinen minuutti päivittyy, uusi lisätty",
+       list(m.close) == [2, 3, 30, 5] and m.index.is_unique and m.index.is_monotonic_increasing, list(m.close))
+
+
 def test_ei_tulevaa(kansio):
     b = smc.lue(f"{kansio}/m1_bid.csv")
     hetket = [b.index[len(b) // 2], b.index[int(len(b) * 0.8)], b.index[-200]]
@@ -173,13 +202,51 @@ def test_tarkistin():
     ok("vanha aikaraja klo 23.00", M.aikaraja(t, False) == pd.Timestamp("2026-10-12 23:00", tz=M.TZ))
 
 
+def test_pieni_vastaa_moottoria(kansio):
+    """Ajastettujen sessioiden pieni.py:n pitää ratkaista kaupat täsmälleen kuten moottori.py."""
+    import random
+    import pieni as P
+    HP = P.Hinnat(f"{kansio}/m1_bid.csv", f"{kansio}/m1_ask.csv")
+    HM = M.Hinnat(f"{kansio}/m1_bid.csv", f"{kansio}/m1_ask.csv")
+    rnd = random.Random(7)
+    erot = 0
+    for _ in range(300):
+        j = rnd.randrange(0, len(HP.t) - 60)
+        u = rnd.choice(["osto", "myynti"])
+        tyyppi = rnd.choice(["markkina", "limit"])
+        k = 1 if u == "osto" else -1
+        hinta = float(HP.ao[j] if u == "osto" else HP.bo[j])
+        s, r = rnd.uniform(5, 30), rnd.uniform(2, 4)
+        e = hinta - k * rnd.uniform(0, 15) if tyyppi == "limit" else hinta + rnd.uniform(-3, 3)
+        x = dict(suunta=u, tyyppi=tyyppi, aika_utc=HP.t[j].isoformat(), entry=round(e, 2), sl=round(e - k * s, 2),
+                 tp=round(e + k * s * r, 2), pvm=rnd.choice(["2026-10-09", "2026-10-12"]), lotit=0.01,
+                 lahella_julkaisua=rnd.random() < 0.2)
+        if tyyppi == "limit":
+            x["voimassa_hki"] = (HP.t[j] + pd.Timedelta(hours=rnd.uniform(0.5, 4))).tz_convert(smc.HKI).strftime("%Y-%m-%d %H:%M")
+        a, b = P.ratkaise_kauppa(HP, x), M.ratkaise_kauppa(HM, x)
+        if a["tila"] != b["tila"] or a.get("exit") != b.get("exit") or a.get("tulos_usd") != b.get("tulos_usd"):
+            erot += 1
+    ok("pieni.py ratkaisee 300 satunnaista kauppaa samoin kuin moottori.py", erot == 0, f"{erot} eroa")
+    perus = dict(suunta="osto", tyyppi="markkina", entry=2000.3, sl=1990.3, tp=2020.3)
+    tila = dict(bid=2000.0, ask=2000.3, datan_ika_min=3, nyt_hki="2026-01-06 12:00", kauppoja_tanaan=0,
+                tappioita_tanaan=0, julkaisut=[])
+    tapaukset = [perus, {**perus, "sl": 2010.3}, {**perus, "tp": 2010.3}, {**perus, "sl": 1960.3, "tp": 2080.3}]
+    tilat = [tila, {**tila, "datan_ika_min": 25}, {**tila, "kauppoja_tanaan": 6}, {**tila, "tappioita_tanaan": 3},
+             {**tila, "julkaisut": ["12:10"]}, {**tila, "nyt_hki": "2026-01-06 03:00"}]
+    samat = all((P.tarkista_kauppa(kk, tt) == []) == (M.tarkista_kauppa(kk, tt) == []) for kk in tapaukset for tt in tilat)
+    ok("pieni.py:n tarkistus hyväksyy ja hylkää samat kaupat kuin moottori.py", samat)
+
+
 if __name__ == "__main__":
     test_rakenne()
     test_fvg()
+    test_kynttilakuviot()
+    test_yhdista()
     test_moottori()
     test_tarkistin()
     if len(sys.argv) > 1:
         test_aikavyohykevirhe(sys.argv[1])
         test_ei_tulevaa(sys.argv[1])
+        test_pieni_vastaa_moottoria(sys.argv[1])
     print(f"\n{virheita} virhettä")
     sys.exit(1 if virheita else 0)
