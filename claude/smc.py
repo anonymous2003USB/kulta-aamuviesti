@@ -404,9 +404,16 @@ def analysoi(kansio, ulos, aika=None):
     s10_polku = f"{kansio}/s10_bid.csv"
     if os.path.exists(s10_polku):
         s10 = lue(s10_polku)
-        s10 = s10[s10.index < t]
+        # live-ajossa sekuntidata saa olla minuuttidataa tuoreempaa (Dukascopy julkaisee minuutin vasta sen sulkeuduttua)
+        s10 = s10[s10.index <= nyt] if aika is None else s10[s10.index < t]
         if len(s10) >= 20:
             tf["S10"] = s10[["open", "high", "low", "close"]]
+            # tuorein hinta sekuntidatasta (sama 10 s kynttilä bid- ja ask-puolelta)
+            if aika is None and os.path.exists(f"{kansio}/s10_ask.csv"):
+                s10a = lue(f"{kansio}/s10_ask.csv")
+                yht = s10.index.intersection(s10a[s10a.index <= nyt].index)
+                if len(yht) and yht[-1] > b.index[-1]:
+                    bid, ask = float(s10.close.loc[yht[-1]]), float(s10a.close.loc[yht[-1]])
     R = {}
     for nimi, k in tf.items():
         a_ = atr(k)
@@ -423,7 +430,8 @@ def analysoi(kansio, ulos, aika=None):
     rivit = []
     hk = t.tz_convert(HKI)
     rivit.append(f"ANALYYSI {hk:%d.%m.%Y %H:%M} Suomen aikaa (viimeisin minuutti {b.index[-1].tz_convert(HKI):%H:%M})")
-    rivit.append(f"Hinta: bid {bid:.2f} / ask {ask:.2f} (spread {ask - bid:.2f})")
+    rivit.append(f"Hinta: bid {bid:.2f} / ask {ask:.2f} (spread {ask - bid:.2f})"
+                 + (" – sekuntidatasta" if "S10" in tf and aika is None else ""))
     rivit.append("ATR (keskim. kynttilän koko): " + " | ".join(f"{n} {R[n]['atr']:.1f}" for n in ("D", "H4", "H1", "M15")))
     rivit.append("")
     rivit.append("RAKENNE (trendi = viimeisimmän murron suunta)")

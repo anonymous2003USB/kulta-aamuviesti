@@ -3,7 +3,7 @@
 Kirjoittaa kansioon:
   m1_bid.csv, m1_ask.csv  minuuttikynttilät, viimeiset 8 päivää (kauppojen ratkaisu, M1/M5/M15-analyysi)
   h1_bid.csv              tuntikynttilät, viimeiset 150 päivää (H1/H4/D-rakenne)
-  s10_bid.csv             10 sekunnin kynttilät, viimeinen 60 min (sekuntichartti)
+  s10_bid.csv, s10_ask.csv  10 sekunnin kynttilät, viimeinen 60 min (sekuntichartti, tuorein hinta)
   meta.json               hakuaika ja viimeisin hinta
 Käyttö: python hae_hinnat.py KANSIO [--valimuisti VKANSIO]
 Välimuistin kanssa haetaan vain uudet minuutit (edellisestä hausta lähtien), joten haku on nopea ja
@@ -76,20 +76,22 @@ def main(kansio, valimuisti=None):
 
     try:
         s10 = hae(d.INTERVAL_SEC_10, d.OFFER_SIDE_BID, nyt - timedelta(minutes=60), nyt)
+        s10a = hae(d.INTERVAL_SEC_10, d.OFFER_SIDE_ASK, nyt - timedelta(minutes=60), nyt)
     except RuntimeError as e:  # sekuntidata on lisätieto: sen puuttuminen ei estä muuta
         print("sekuntidata puuttuu:", e, file=sys.stderr)
-        s10 = None
+        s10 = s10a = None
 
     for nimi, df in m1.items():
         df.round(3).to_csv(f"{vm}/{nimi}.csv", index_label="timestamp")
-    if s10 is not None:
-        s10.round(3).to_csv(f"{vm}/s10_bid.csv", index_label="timestamp")
-    elif os.path.exists(f"{vm}/s10_bid.csv"):
-        os.remove(f"{vm}/s10_bid.csv")
+    for df, nimi in ((s10, "s10_bid"), (s10a, "s10_ask")):
+        if df is not None:
+            df.round(3).to_csv(f"{vm}/{nimi}.csv", index_label="timestamp")
+        elif os.path.exists(f"{vm}/{nimi}.csv"):
+            os.remove(f"{vm}/{nimi}.csv")
 
     if os.path.abspath(vm) != os.path.abspath(kansio):
         os.makedirs(kansio, exist_ok=True)
-        for f in ("m1_bid.csv", "m1_ask.csv", "h1_bid.csv", "s10_bid.csv"):
+        for f in ("m1_bid.csv", "m1_ask.csv", "h1_bid.csv", "s10_bid.csv", "s10_ask.csv"):
             if os.path.exists(f"{vm}/{f}"):
                 shutil.copy(f"{vm}/{f}", f"{kansio}/{f}")
 
