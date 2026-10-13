@@ -26,7 +26,7 @@ import pandas as pd
 
 HKI = "Europe/Helsinki"
 NY = "America/New_York"
-SWING_N = {"D": 2, "H4": 2, "H1": 3, "M15": 3, "M5": 3}
+SWING_N = {"D": 2, "H4": 2, "H1": 3, "M15": 3, "M5": 3, "M1": 3}
 
 
 # ---------------------------------------------------------------- data
@@ -399,7 +399,8 @@ def analysoi(kansio, ulos, aika=None):
     m5 = suljetut(kynttilat(b, "5min"), pd.Timedelta(minutes=5), t)
     bid, ask = float(b.close.iloc[-1]), float(a.close.iloc[-1])
 
-    tf = {"D": d1, "H4": h4, "H1": h1, "M15": m15, "M5": m5}
+    m1 = b[b.index >= t - pd.Timedelta(days=3)][["open", "high", "low", "close"]]
+    tf = {"D": d1, "H4": h4, "H1": h1, "M15": m15, "M5": m5, "M1": m1}
     R = {}
     for nimi, k in tf.items():
         a_ = atr(k)
@@ -421,7 +422,7 @@ def analysoi(kansio, ulos, aika=None):
     rivit.append("")
     rivit.append("RAKENNE (trendi = viimeisimmän murron suunta)")
     sanat = {1: "NOUSU", -1: "LASKU", 0: "ei selvä"}
-    for n in ("D", "H4", "H1", "M15", "M5"):
+    for n in ("D", "H4", "H1", "M15", "M5", "M1"):
         r = R[n]
         viim = r["tap"][-3:]
         kuvaus = "; ".join(f"{e['tyyppi']} {'ylös' if e['suunta'] == 1 else 'alas'} {aikaf(r['k'], e['j'])} @ {e['taso']:.1f}"
@@ -492,16 +493,17 @@ def analysoi(kansio, ulos, aika=None):
 
     kuvat = {}
     tasot_kuvaan = [o for o in lik if not o["nimi"].startswith("Tasaiset")]
-    kuvat["h1"] = piirra(h1, R["H1"]["sw"], R["H1"]["tap"], R["H1"]["zs"],
-                         R["H1"]["fv"], tasot_kuvaan, bid, f"XAU/USD H1 {hk:%d.%m. %H:%M}", f"{ulos}/h1.png", 120)
-    kuvat["m15"] = piirra(m15, R["M15"]["sw"], R["M15"]["tap"], R["M15"]["zs"], R["M15"]["fv"],
-                          lik, bid, f"XAU/USD M15 {hk:%d.%m. %H:%M}", f"{ulos}/m15.png", 160)
-    for nimi, kv in kuvat.items():
-        k = h1 if nimi == "h1" else m15
-        if abs(kv["viimeinen_sulku"] - float(k.close.iloc[-1])) > 1e-6:
+    piirrettavat = [("d1", "D", tasot_kuvaan, 90), ("h4", "H4", tasot_kuvaan, 120), ("h1", "H1", tasot_kuvaan, 120),
+                    ("m15", "M15", lik, 160), ("m5", "M5", lik, 144), ("m1", "M1", lik, 120)]
+    for nimi, n, tasot, maara in piirrettavat:
+        r = R[n]
+        kuvat[nimi] = piirra(r["k"], r["sw"], r["tap"], r["zs"], r["fv"], tasot, bid,
+                             f"XAU/USD {n} {hk:%d.%m. %H:%M}", f"{ulos}/{nimi}.png", maara)
+        if abs(kuvat[nimi]["viimeinen_sulku"] - float(r["k"].close.iloc[-1])) > 1e-6:
             virheet.append(f"kuva {nimi}: viimeinen kynttilä ei vastaa dataa")
-    rivit.append(f"  ok: kuvat piirretty, viimeinen H1-kynttilä {kuvat['h1']['viimeinen']}, "
-                 f"viimeinen M15-kynttilä {kuvat['m15']['viimeinen']} (Suomen aikaa, alkuhetki)")
+    rivit.append("  ok: kuvat piirretty (alkuhetki Suomen aikaa): " +
+                 ", ".join(f"{n} viimeinen {kuvat[nimi]['viimeinen']}" for nimi, n, _, _ in piirrettavat))
+    rivit.append("  KATSO KAIKKI KUVAT ennen päätöstä: d1.png, h4.png, h1.png, m15.png, m5.png, m1.png")
 
     teksti = "\n".join(rivit)
     open(f"{ulos}/analyysi.txt", "w").write(teksti)

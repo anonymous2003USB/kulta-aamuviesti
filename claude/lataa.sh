@@ -12,7 +12,7 @@ for f in meta.json m1_bid.csv m1_ask.csv h1_bid.csv; do
 done
 # valmis analyysi ja chartit (GitHub Actions tekee ne jokaisen haun yhteydessä)
 mkdir -p "$K/anal"
-for f in anal/analyysi.txt anal/analyysi.json anal/h1.png anal/m15.png anal/analyysi_tuloste.txt ajat.txt; do
+for f in anal/analyysi.txt anal/analyysi.json anal/d1.png anal/h4.png anal/h1.png anal/m15.png anal/m5.png anal/m1.png anal/analyysi_tuloste.txt ajat.txt; do
   curl -sSf -o "$K/$f" "https://raw.githubusercontent.com/$REPO/$SHA/$f" 2>/dev/null || true
 done
 python3 - "$K" "$SHA" <<'EOF'
