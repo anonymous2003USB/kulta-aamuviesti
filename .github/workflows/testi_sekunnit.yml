@@ -29,4 +29,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cd /tmp/h && git init -q -b hinnat-testi && git add . && git -c user.name=bot -c user.email=bot@example.com commit -qm testi && git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" hinnat-testi
+          mv /tmp/h/anal_tuloste.txt /tmp/h/anal/ 2>/dev/null; cd /tmp/h && git init -q -b hinnat-testi && git add . && git -c user.name=bot -c user.email=bot@example.com commit -qm testi && git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" hinnat-testi
