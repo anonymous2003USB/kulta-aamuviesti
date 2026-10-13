@@ -1,0 +1,28 @@
+name: Testi arkisto
+on:
+  push:
+    branches: [testi-arkisto]
+permissions:
+  contents: write
+jobs:
+  testi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install dukascopy-python pandas matplotlib
+      - name: Haku, analyysi ja arkistointi testihaaraan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARK_HAARA: arkisto-testi
+        run: |
+          python claude/hae_hinnat.py /tmp/h --valimuisti /tmp/hv
+          python claude/smc.py /tmp/h /tmp/h/anal > /tmp/h/anal_tuloste.txt 2>&1; echo "paluukoodi $?"
+          { python claude/ajat.py; echo "--- Aasia"; python claude/ajat.py --aasia; } > /tmp/h/ajat.txt
+          python claude/arkistoi.py /tmp/h --nyt
+          sleep 61
+          python claude/arkistoi.py /tmp/h --nyt
+          python claude/testit.py /tmp/h | tail -1
