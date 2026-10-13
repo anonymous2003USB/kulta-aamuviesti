@@ -1,12 +1,12 @@
 {
- "luotu": "2026-10-12T08:10+03:00",
- "lahetetty": "2026-10-12",
- "paiva": "2026-10-12",
+ "luotu": "2026-10-13T08:10+03:00",
+ "lahetetty": "2026-10-13",
+ "paiva": "2026-10-13",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.14,
- "tavallinen_liike_pros": 1.534,
+ "odotettu_liike_pros": 1.104,
+ "tavallinen_liike_pros": 1.519,
  "todennakoisyys": {
-  "30": 0.703,
+  "30": 0.693,
   "50": 0.318,
   "100": 0.036
  },
