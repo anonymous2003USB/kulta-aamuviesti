@@ -1,18 +1,43 @@
 {
- "luotu": "2026-10-13T08:10+03:00",
- "lahetetty": "2026-10-13",
- "paiva": "2026-10-13",
+ "luotu": "2026-10-14T08:10+03:00",
+ "lahetetty": "2026-10-14",
+ "paiva": "2026-10-14",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.104,
- "tavallinen_liike_pros": 1.519,
+ "odotettu_liike_pros": 1.102,
+ "tavallinen_liike_pros": 1.534,
  "todennakoisyys": {
-  "30": 0.693,
-  "50": 0.318,
-  "100": 0.036
+  "30": 0.708,
+  "50": 0.297,
+  "100": 0.038
  },
- "pienin_stoppi_usd": 14.2,
- "futuurin_hinta": 4219.7,
- "julkaisut": [],
+ "pienin_stoppi_usd": 13.7,
+ "futuurin_hinta": 4189.0,
+ "julkaisut": [
+  {
+   "klo": "15:30",
+   "nimi": "CPI m/m",
+   "odotus": "0.6%",
+   "edellinen": "0.4%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "CPI y/y",
+   "odotus": "3.6%",
+   "edellinen": "3.4%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "Core CPI m/m",
+   "odotus": "0.2%",
+   "edellinen": "0.3%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "Core CPI y/y",
+   "odotus": "2.5%",
+   "edellinen": "2.4%"
+  }
+ ],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
