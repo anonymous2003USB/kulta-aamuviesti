@@ -1,41 +1,41 @@
 {
- "luotu": "2026-10-14T08:10+03:00",
- "lahetetty": "2026-10-14",
- "paiva": "2026-10-14",
+ "luotu": "2026-10-15T08:10+03:00",
+ "lahetetty": "2026-10-15",
+ "paiva": "2026-10-15",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.102,
+ "odotettu_liike_pros": 1.169,
  "tavallinen_liike_pros": 1.534,
  "todennakoisyys": {
-  "30": 0.708,
-  "50": 0.297,
-  "100": 0.038
+  "30": 0.69,
+  "50": 0.294,
+  "100": 0.037
  },
- "pienin_stoppi_usd": 13.7,
- "futuurin_hinta": 4189.0,
+ "pienin_stoppi_usd": 13.6,
+ "futuurin_hinta": 4167.1,
  "julkaisut": [
   {
    "klo": "15:30",
-   "nimi": "CPI m/m",
+   "nimi": "Core PPI m/m",
+   "odotus": "0.3%",
+   "edellinen": "0.2%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "Core Retail Sales m/m",
+   "odotus": "0.6%",
+   "edellinen": "1.4%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "PPI m/m",
    "odotus": "0.6%",
    "edellinen": "0.4%"
   },
   {
    "klo": "15:30",
-   "nimi": "CPI y/y",
-   "odotus": "3.6%",
-   "edellinen": "3.4%"
-  },
-  {
-   "klo": "15:30",
-   "nimi": "Core CPI m/m",
-   "odotus": "0.2%",
-   "edellinen": "0.3%"
-  },
-  {
-   "klo": "15:30",
-   "nimi": "Core CPI y/y",
-   "odotus": "2.5%",
-   "edellinen": "2.4%"
+   "nimi": "Retail Sales m/m",
+   "odotus": "0.3%",
+   "edellinen": "1.2%"
   }
  ],
  "ennuste_virhe": null,
