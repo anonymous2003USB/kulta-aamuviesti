@@ -1,0 +1,63 @@
+ANALYYSI 16.10.2026 23:58 Suomen aikaa (viimeisin minuutti 23:57)
+Hinta: bid 4165.01 / ask 4165.78 (spread 0.78) – sekuntidatasta
+ATR (keskim. kynttilän koko): D 79.5 | H4 33.9 | H1 15.2 | M15 4.9
+
+RAKENNE (trendi = viimeisimmän murron suunta)
+  D    LASKU    viim. murrot: CHoCH alas 16.09. 00:00 @ 4282.0; BOS alas 28.09. 00:00 @ 4234.7; BOS alas 07.10. 00:00 @ 4110.6
+  H4   NOUSU    viim. murrot: BOS ylös 12.10. 00:00 @ 4207.3; CHoCH alas 14.10. 08:00 @ 4150.5; CHoCH ylös 15.10. 20:00 @ 4161.5
+  H1   NOUSU    viim. murrot: CHoCH ylös 15.10. 05:00 @ 4155.6; BOS ylös 15.10. 22:00 @ 4168.4; BOS ylös 16.10. 06:00 @ 4177.4
+  M15  NOUSU    viim. murrot: BOS alas 16.10. 15:45 @ 4171.2; CHoCH ylös 16.10. 16:45 @ 4181.4; BOS ylös 16.10. 22:15 @ 4167.8
+  M5   LASKU    viim. murrot: BOS alas 16.10. 21:30 @ 4158.2; CHoCH ylös 16.10. 22:25 @ 4167.7; CHoCH alas 16.10. 23:50 @ 4165.8
+  M1   LASKU    viim. murrot: BOS ylös 16.10. 23:24 @ 4167.7; BOS ylös 16.10. 23:29 @ 4168.8; CHoCH alas 16.10. 23:50 @ 4166.7
+  S10  NOUSU    viim. murrot: BOS alas 16.10. 23:55 @ 4163.1; CHoCH ylös 16.10. 23:56 @ 4164.1; BOS ylös 16.10. 23:58 @ 4165.0
+
+VYÖHYKKEET (voimassa, lähimmät ensin; käynnit = montako kertaa hinta palannut, 3+ = kulunut, ei näytetä)
+  Kysyntä (alapuolella):
+    H1  4147.0–4160.7 (16.10. 04:00, BOS, voimakas lähtö, käynnit 2) 4.3 $ päässä
+    M15 4155.7–4160.4 (16.10. 21:30, BOS, voimakas lähtö, käynnit 0) 4.6 $ päässä
+    H4  4130.1–4160.4 (15.10. 12:00, CHoCH, käynnit 2) 4.6 $ päässä
+    M15 4147.0–4150.9 (16.10. 04:30, CHoCH, voimakas lähtö, käynnit 0) 14.1 $ päässä
+    M15 4099.7–4107.0 (15.10. 02:00, BOS, voimakas lähtö, käynnit 0) 58.0 $ päässä
+    H1  4079.4–4095.7 (14.10. 18:00, CHoCH, voimakas lähtö, käynnit 0) 69.3 $ päässä
+  Tarjonta (yläpuolella):
+    H4  4150.5–4196.2 (13.10. 04:00, CHoCH, voimakas lähtö, käynnit 2) HINTA VYÖHYKKEELLÄ
+    H1  4187.1–4196.2 (13.10. 07:00, CHoCH, voimakas lähtö, käynnit 2) 22.1 $ päässä
+    H1  4200.0–4216.9 (12.10. 04:00, CHoCH, voimakas lähtö, käynnit 1) 35.0 $ päässä
+    M15 4207.3–4214.2 (12.10. 05:00, CHoCH, voimakas lähtö, käynnit 0) 42.3 $ päässä
+    H1  4269.8–4291.1 (25.09. 18:00, CHoCH, voimakas lähtö, käynnit 0) 104.8 $ päässä
+    H4  4289.3–4315.5 (25.09. 12:00, BOS, voimakas lähtö, käynnit 0) 124.3 $ päässä
+
+FVG (täyttämättömät aukot, H1 ja M15)
+    H1  laskeva 4195.7–4201.2 (12.10. 08:00, osittain täytetty)
+    H1  nouseva 4090.6–4092.5 (14.10. 22:00)
+    H1  nouseva 4112.5–4136.3 (15.10. 04:00, osittain täytetty)
+    H1  laskeva 4169.8–4181.1 (16.10. 19:00, osittain täytetty)
+    M15 laskeva 4181.4–4184.0 (16.10. 18:15)
+    M15 laskeva 4178.5–4179.6 (16.10. 18:30)
+    M15 laskeva 4169.8–4172.7 (16.10. 19:00, osittain täytetty)
+    M15 nouseva 4160.2–4164.0 (16.10. 22:15)
+
+PRICE ACTION (kynttiläkuviot viimeisissä suljetuissa kynttilöissä; POI = vyöhyke tai FVG samaan suuntaan)
+    M15 16.10. 23:30 neutraali sisäpäivä
+    M5  16.10. 23:45 laskeva nielevä, POI:lla (H4 tarjonta 4150.5–4196.2)
+
+LIKVIDITEETTI (stoppien kasaumat)
+    Ed. viikon huippu          4207.3  pyyhkäisty 12.10. 03:14 ja sulki takaisin
+    Aasian huippu              4186.2  pyyhkäisty 16.10. 10:11 ja sulki takaisin
+    Tasaiset huiput (M15)      4186.2  pyyhkäisty 16.10. 16:52
+    PDH (eilisen huippu)       4177.4  pyyhkäisty 16.10. 05:56
+    Tasaiset pohjat (M15)      4154.7  ei pyyhkäisty
+    Aasian pohja               4147.0  ei pyyhkäisty
+    Tasaiset pohjat (H1)       4143.5  ei pyyhkäisty
+    Tasaiset pohjat (H1)       4130.1  ei pyyhkäisty
+    PDL (eilisen pohja)        4099.7  ei pyyhkäisty
+    Ed. viikon pohja           4065.5  ei pyyhkäisty
+  Tämän päivän (NY-päivä) alue: 4147.0–4198.8
+
+TARKISTUS
+  ok: H1 vs M1 suurin ero 0.00 $ (136 tuntia)
+  ok: datan ikä 1 min
+  ok: kuvat piirretty (alkuhetki Suomen aikaa): D viimeinen 15.10. 00:00:00, H4 viimeinen 16.10. 16:00:00, H1 viimeinen 16.10. 22:00:00, M15 viimeinen 16.10. 23:30:00, M5 viimeinen 16.10. 23:50:00, M1 viimeinen 16.10. 23:57:00, S10 viimeinen 16.10. 23:58:50
+  ok: sekuntidata, viimeinen 10 s kynttilä 23:58:50, ikä 5 s
+  KATSO KAIKKI KUVAT ennen päätöstä: d1.png, h4.png, h1.png, m15.png, m5.png, m1.png, s10.png
+paluukoodi 0
