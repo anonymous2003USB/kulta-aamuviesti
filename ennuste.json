@@ -1,25 +1,18 @@
 {
- "luotu": "2026-10-16T08:10+03:00",
- "lahetetty": "2026-10-16",
- "paiva": "2026-10-16",
+ "luotu": "2026-10-19T08:10+03:00",
+ "lahetetty": "2026-10-19",
+ "paiva": "2026-10-19",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.15,
+ "odotettu_liike_pros": 1.104,
  "tavallinen_liike_pros": 1.519,
  "todennakoisyys": {
-  "30": 0.701,
-  "50": 0.294,
-  "100": 0.037
+  "30": 0.704,
+  "50": 0.301,
+  "100": 0.036
  },
- "pienin_stoppi_usd": 13.5,
- "futuurin_hinta": 4196.2,
- "julkaisut": [
-  {
-   "klo": "06:30",
-   "nimi": "Fed Chairman Warsh Speaks",
-   "odotus": "",
-   "edellinen": ""
-  }
- ],
+ "pienin_stoppi_usd": 14.1,
+ "futuurin_hinta": 4203.9,
+ "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
