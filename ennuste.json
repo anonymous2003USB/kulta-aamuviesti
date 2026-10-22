@@ -1,17 +1,17 @@
 {
- "luotu": "2026-10-21T08:10+03:00",
- "lahetetty": "2026-10-21",
- "paiva": "2026-10-21",
+ "luotu": "2026-10-22T08:10+03:00",
+ "lahetetty": "2026-10-22",
+ "paiva": "2026-10-22",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.059,
+ "odotettu_liike_pros": 1.029,
  "tavallinen_liike_pros": 1.534,
  "todennakoisyys": {
-  "30": 0.689,
-  "50": 0.289,
-  "100": 0.037
+  "30": 0.686,
+  "50": 0.277,
+  "100": 0.031
  },
- "pienin_stoppi_usd": 13.7,
- "futuurin_hinta": 4133.0,
+ "pienin_stoppi_usd": 13.8,
+ "futuurin_hinta": 4106.8,
  "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
