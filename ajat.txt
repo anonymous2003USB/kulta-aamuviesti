@@ -1,0 +1,16 @@
+08:00 Suomen aikaa  2026-10-23T05:00:00Z  [kauppa]  London 8am
+10:00 Suomen aikaa  2026-10-23T07:00:00Z  [kauppa]  Lontoon avaus (8.00 Lontoon aikaa)
+11:30 Suomen aikaa  2026-10-23T08:30:00Z  [kauppa]  Lontoon aamun jatko (9.30 Lontoon aikaa)
+13:30 Suomen aikaa  2026-10-23T10:30:00Z  [kauppa]  1:30 major US economic data
+14:30 Suomen aikaa  2026-10-23T11:30:00Z  [kauppa]  2:30 NYC activity kicks in
+15:00 Suomen aikaa  2026-10-23T12:00:00Z  [kauppa]  3-4pm volatile time for gold
+15:40 Suomen aikaa  2026-10-23T12:40:00Z  [kauppa]  10 min USA:n talousdatan jälkeen (8.30 New Yorkin aikaa)
+16:00 Suomen aikaa  2026-10-23T13:00:00Z  [kauppa]  London open 4pm-6pm
+16:35 Suomen aikaa  2026-10-23T13:35:00Z  [kauppa]  New Yorkin avaus (9.30 New Yorkin aikaa)
+17:30 Suomen aikaa  2026-10-23T14:30:00Z  [kauppa]  Look forward to 5:30pm + Kullan vilkkain tunti (15.30 Lontoon aikaa)
+18:30 Suomen aikaa  2026-10-23T15:30:00Z  [kauppa]  Lontoo/NY-päällekkäisyyden loppu: MINIMI 2 KAUPPAA -tarkistus
+21:00 Suomen aikaa  2026-10-23T18:00:00Z  [kauppa]  NYC open 9pm-12am / London-NYC overlap 9pm-12pm
+23:00 Suomen aikaa  2026-10-23T20:00:00Z  [kauppa]  NYC open 9pm-12am / overlap: päivän viimeinen tarkistus
+--- Aasia
+03:00 Suomen aikaa  2026-10-23T00:00:00Z  [seuranta]  Aasia: Tokion avaus
+04:00 Suomen aikaa  2026-10-23T01:00:00Z  [seuranta]  Aasia: Shanghain kultapörssin ja Hongkongin avaus

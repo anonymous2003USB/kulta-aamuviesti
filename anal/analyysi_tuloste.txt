@@ -1,0 +1,60 @@
+ANALYYSI 23.10.2026 23:58 Suomen aikaa (viimeisin minuutti 23:57)
+Hinta: bid 3994.87 / ask 3997.49 (spread 2.62) – sekuntidatasta
+ATR (keskim. kynttilän koko): D 68.1 | H4 33.1 | H1 13.2 | M15 4.6
+
+RAKENNE (trendi = viimeisimmän murron suunta)
+  D    LASKU    viim. murrot: BOS alas 28.09. 00:00 @ 4234.7; BOS alas 07.10. 00:00 @ 4110.6; BOS alas 22.10. 00:00 @ 4073.3
+  H4   LASKU    viim. murrot: CHoCH ylös 15.10. 20:00 @ 4161.5; CHoCH alas 19.10. 16:00 @ 4154.7; BOS alas 22.10. 04:00 @ 4106.0
+  H1   LASKU    viim. murrot: BOS alas 22.10. 06:00 @ 4104.6; BOS alas 22.10. 14:00 @ 4066.6; BOS alas 23.10. 04:00 @ 4020.9
+  M15  LASKU    viim. murrot: BOS ylös 23.10. 16:00 @ 4030.8; CHoCH alas 23.10. 17:00 @ 4021.3; BOS alas 23.10. 23:30 @ 3993.6
+  M5   LASKU    viim. murrot: CHoCH alas 23.10. 22:05 @ 3994.4; CHoCH ylös 23.10. 22:35 @ 3998.9; CHoCH alas 23.10. 23:30 @ 3995.2
+  M1   NOUSU    viim. murrot: CHoCH alas 23.10. 23:32 @ 3995.5; BOS alas 23.10. 23:42 @ 3993.1; CHoCH ylös 23.10. 23:53 @ 3995.2
+  S10  NOUSU    viim. murrot: BOS ylös 23.10. 23:53 @ 3994.3; BOS ylös 23.10. 23:54 @ 3997.2; BOS ylös 23.10. 23:55 @ 3997.4
+
+VYÖHYKKEET (voimassa, lähimmät ensin; käynnit = montako kertaa hinta palannut, 3+ = kulunut, ei näytetä)
+  Kysyntä (alapuolella):
+    -
+  Tarjonta (yläpuolella):
+    M15 3998.0–4001.3 (23.10. 22:45, BOS, käynnit 0) 3.2 $ päässä
+    M15 4024.4–4032.6 (23.10. 16:00, CHoCH, voimakas lähtö, käynnit 0, LEVEÄ) 29.5 $ päässä
+    M15 4039.9–4046.5 (22.10. 20:30, BOS, voimakas lähtö, käynnit 0) 45.0 $ päässä
+    M15 4049.9–4061.1 (22.10. 17:30, BOS, voimakas lähtö, käynnit 0, LEVEÄ) 55.0 $ päässä
+    M15 4081.0–4091.6 (22.10. 15:45, BOS, voimakas lähtö, käynnit 0, LEVEÄ) 86.1 $ päässä
+    H1  4086.9–4102.6 (22.10. 09:00, BOS, voimakas lähtö, käynnit 1) 92.0 $ päässä
+
+FVG (täyttämättömät aukot, H1 ja M15)
+    H1  laskeva 4126.0–4130.1 (22.10. 03:00)
+    H1  laskeva 4093.0–4108.3 (22.10. 07:00, osittain täytetty)
+    H1  laskeva 4031.0–4034.5 (22.10. 22:00, osittain täytetty)
+    H1  laskeva 4005.6–4016.0 (23.10. 18:00, osittain täytetty)
+    M15 laskeva 4040.5–4043.4 (22.10. 21:15)
+    M15 laskeva 4034.4–4035.9 (22.10. 21:45)
+    M15 laskeva 4008.8–4016.0 (23.10. 17:15)
+    M15 laskeva 4001.4–4007.1 (23.10. 17:30, osittain täytetty)
+
+PRICE ACTION (kynttiläkuviot viimeisissä suljetuissa kynttilöissä; POI = vyöhyke tai FVG samaan suuntaan)
+    M15 23.10. 23:15 neutraali sisäpäivä
+    M15 23.10. 23:30 laskeva nielevä
+    M5  23.10. 23:45 nouseva pin bar
+    M5  23.10. 23:50 nouseva nielevä
+
+LIKVIDITEETTI (stoppien kasaumat)
+    Ed. viikon huippu          4216.9  ei pyyhkäisty
+    PDH (eilisen huippu)       4145.6  ei pyyhkäisty
+    Ed. viikon pohja           4073.3  pyyhkäisty 22.10. 08:44 ja sulki takaisin
+    Tasaiset huiput (M15)      4032.5  pyyhkäisty 23.10. 16:12 ja sulki takaisin
+    Aasian huippu              4032.0  pyyhkäisty 23.10. 15:46 ja sulki takaisin
+    Tasaiset huiput (M15)      4030.8  pyyhkäisty 23.10. 15:45
+    PDL (eilisen pohja)        4020.9  pyyhkäisty 23.10. 03:03
+    Tasaiset pohjat (M15)      4019.9  pyyhkäisty 23.10. 16:45 ja sulki takaisin
+    Tasaiset huiput (M15)      4002.0  ei pyyhkäisty
+    Aasian pohja               3986.5  pyyhkäisty 23.10. 17:27
+  Tämän päivän (NY-päivä) alue: 3975.3–4034.3
+
+TARKISTUS
+  ok: H1 vs M1 suurin ero 0.00 $ (136 tuntia)
+  ok: datan ikä 1 min
+  ok: kuvat piirretty (alkuhetki Suomen aikaa): D viimeinen 22.10. 00:00:00, H4 viimeinen 23.10. 16:00:00, H1 viimeinen 23.10. 22:00:00, M15 viimeinen 23.10. 23:30:00, M5 viimeinen 23.10. 23:50:00, M1 viimeinen 23.10. 23:57:00, S10 viimeinen 23.10. 23:58:50
+  ok: sekuntidata, viimeinen 10 s kynttilä 23:58:50, ikä 4 s
+  KATSO KAIKKI KUVAT ennen päätöstä: d1.png, h4.png, h1.png, m15.png, m5.png, m1.png, s10.png
+paluukoodi 0
