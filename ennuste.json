@@ -1,18 +1,37 @@
 {
- "luotu": "2026-10-27T08:10+02:00",
- "lahetetty": "2026-10-27",
- "paiva": "2026-10-27",
+ "luotu": "2026-10-28T08:10+02:00",
+ "lahetetty": "2026-10-28",
+ "paiva": "2026-10-28",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.038,
+ "odotettu_liike_pros": 1.097,
  "tavallinen_liike_pros": 1.534,
  "todennakoisyys": {
-  "30": 0.69,
-  "50": 0.256,
-  "100": 0.03
+  "30": 0.688,
+  "50": 0.259,
+  "100": 0.032
  },
- "pienin_stoppi_usd": 13.7,
- "futuurin_hinta": 4020.7,
- "julkaisut": [],
+ "pienin_stoppi_usd": 13.6,
+ "futuurin_hinta": 4043.2,
+ "julkaisut": [
+  {
+   "klo": "20:00",
+   "nimi": "FOMC Statement",
+   "odotus": "",
+   "edellinen": ""
+  },
+  {
+   "klo": "20:00",
+   "nimi": "Federal Funds Rate",
+   "odotus": "4.00%",
+   "edellinen": "4.00%"
+  },
+  {
+   "klo": "20:30",
+   "nimi": "FOMC Press Conference",
+   "odotus": "",
+   "edellinen": ""
+  }
+ ],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
