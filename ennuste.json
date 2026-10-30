@@ -1,31 +1,18 @@
 {
- "luotu": "2026-10-29T08:10+02:00",
- "lahetetty": "2026-10-29",
- "paiva": "2026-10-29",
+ "luotu": "2026-10-30T08:10+02:00",
+ "lahetetty": "2026-10-30",
+ "paiva": "2026-10-30",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.12,
+ "odotettu_liike_pros": 1.084,
  "tavallinen_liike_pros": 1.534,
  "todennakoisyys": {
-  "30": 0.689,
-  "50": 0.263,
+  "30": 0.674,
+  "50": 0.258,
   "100": 0.032
  },
- "pienin_stoppi_usd": 13.6,
- "futuurin_hinta": 4040.0,
- "julkaisut": [
-  {
-   "klo": "14:30",
-   "nimi": "Advance GDP q/q",
-   "odotus": "3.2%",
-   "edellinen": "1.5%"
-  },
-  {
-   "klo": "14:30",
-   "nimi": "Core PCE Price Index m/m",
-   "odotus": "0.3%",
-   "edellinen": "0.2%"
-  }
- ],
+ "pienin_stoppi_usd": 13.4,
+ "futuurin_hinta": 3999.3,
+ "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
