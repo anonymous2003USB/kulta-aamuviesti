@@ -1,25 +1,18 @@
 {
- "luotu": "2026-11-03T08:10+02:00",
- "lahetetty": "2026-11-03",
- "paiva": "2026-11-03",
+ "luotu": "2026-11-04T08:10+02:00",
+ "lahetetty": "2026-11-04",
+ "paiva": "2026-11-04",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.29,
- "tavallinen_liike_pros": 1.534,
+ "odotettu_liike_pros": 1.315,
+ "tavallinen_liike_pros": 1.519,
  "todennakoisyys": {
-  "30": 0.646,
-  "50": 0.254,
+  "30": 0.69,
+  "50": 0.273,
   "100": 0.037
  },
- "pienin_stoppi_usd": 13.3,
- "futuurin_hinta": 3927.4,
- "julkaisut": [
-  {
-   "klo": "17:16",
-   "nimi": "Congressional Elections",
-   "odotus": "",
-   "edellinen": ""
-  }
- ],
+ "pienin_stoppi_usd": 13.6,
+ "futuurin_hinta": 4013.5,
+ "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
