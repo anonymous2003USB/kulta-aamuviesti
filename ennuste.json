@@ -1,18 +1,37 @@
 {
- "luotu": "2026-11-05T08:10+02:00",
- "lahetetty": "2026-11-05",
- "paiva": "2026-11-05",
+ "luotu": "2026-11-06T08:10+02:00",
+ "lahetetty": "2026-11-06",
+ "paiva": "2026-11-06",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.292,
- "tavallinen_liike_pros": 1.534,
+ "odotettu_liike_pros": 1.287,
+ "tavallinen_liike_pros": 1.519,
  "todennakoisyys": {
-  "30": 0.704,
-  "50": 0.302,
+  "30": 0.698,
+  "50": 0.27,
   "100": 0.037
  },
- "pienin_stoppi_usd": 14.0,
- "futuurin_hinta": 4126.8,
- "julkaisut": [],
+ "pienin_stoppi_usd": 13.7,
+ "futuurin_hinta": 4050.1,
+ "julkaisut": [
+  {
+   "klo": "15:30",
+   "nimi": "Average Hourly Earnings m/m",
+   "odotus": "0.3%",
+   "edellinen": "0.1%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "Non-Farm Employment Change",
+   "odotus": "65K",
+   "edellinen": "29K"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "Unemployment Rate",
+   "odotus": "4.2%",
+   "edellinen": "4.2%"
+  }
+ ],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
