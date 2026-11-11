@@ -84,6 +84,24 @@ def test_yhdista():
        list(m.close) == [2, 3, 30, 5] and m.index.is_unique and m.index.is_monotonic_increasing, list(m.close))
 
 
+def test_arkisto_ajat():
+    import arkistoi as A
+    with tempfile.TemporaryDirectory() as t:
+        open(f"{t}/ajat.txt", "w").write(
+            "08:00 Suomen aikaa  2026-10-13T05:00:00Z  [kauppa]  London 8am\n"
+            "16:35 Suomen aikaa  2026-10-13T13:35:00Z  [kauppa]  New Yorkin avaus\n"
+            "--- Aasia\n03:00 Suomen aikaa  2026-10-13T00:00:00Z  [seuranta]  Tokio\n")
+        ok("arkisto: kauppahetket luetaan, Aasian seuranta ei", A.kauppahetket(f"{t}/ajat.txt") == ["08:00", "16:35"])
+        h = A.arkistohetket(f"{t}/ajat.txt")
+        ok("arkisto: myös puolitunnit 7.00–23.30 ja kauppahetki 16.35", "16:35" in h and "07:00" in h and "23:30" in h
+           and "03:00" not in h and len(h) == 35, len(h))
+    import io
+    from PIL import Image
+    with tempfile.TemporaryDirectory() as t:
+        Image.new("RGBA", (400, 200), (255, 255, 255, 255)).save(f"{t}/k.png")
+        ok("arkisto: kevennetty kuva on kelvollinen PNG", Image.open(io.BytesIO(A.kevenna(f"{t}/k.png"))).size == (400, 200))
+
+
 def test_ei_tulevaa(kansio):
     b = smc.lue(f"{kansio}/m1_bid.csv")
     hetket = [b.index[len(b) // 2], b.index[int(len(b) * 0.8)], b.index[-200]]
@@ -242,6 +260,7 @@ if __name__ == "__main__":
     test_fvg()
     test_kynttilakuviot()
     test_yhdista()
+    test_arkisto_ajat()
     test_moottori()
     test_tarkistin()
     if len(sys.argv) > 1:

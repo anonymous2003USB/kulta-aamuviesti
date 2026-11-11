@@ -11,6 +11,7 @@ SKRIPTI="$PWD/claude/hae_hinnat.py"
 
 ANALYYSI="$PWD/claude/smc.py"
 AJAT="$PWD/claude/ajat.py"
+ARKISTO="$PWD/claude/arkistoi.py"
 
 julkaise() {
   rm -rf /tmp/h && python "$SKRIPTI" /tmp/h --valimuisti /tmp/hv || return 1
@@ -27,6 +28,8 @@ julkaise() {
         commit -qm "Hinnat $(date -u +%FT%TZ)" &&
     git push -qf "$REMOTE" hinnat
   )
+  # kauppahetkien chartit pysyvästi talteen (arkisto-haara), ei kaada syötettä jos epäonnistuu
+  python "$ARKISTO" /tmp/h || true
 }
 
 jatka() {
