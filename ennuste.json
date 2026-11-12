@@ -1,17 +1,17 @@
 {
- "luotu": "2026-11-11T08:10+02:00",
- "lahetetty": "2026-11-11",
- "paiva": "2026-11-11",
+ "luotu": "2026-11-12T08:10+02:00",
+ "lahetetty": "2026-11-12",
+ "paiva": "2026-11-12",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.354,
- "tavallinen_liike_pros": 1.518,
+ "odotettu_liike_pros": 1.409,
+ "tavallinen_liike_pros": 1.517,
  "todennakoisyys": {
-  "30": 0.704,
-  "50": 0.28,
+  "30": 0.688,
+  "50": 0.276,
   "100": 0.042
  },
- "pienin_stoppi_usd": 13.8,
- "futuurin_hinta": 4065.6,
+ "pienin_stoppi_usd": 13.6,
+ "futuurin_hinta": 3983.0,
  "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
