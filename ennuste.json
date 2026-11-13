@@ -1,18 +1,31 @@
 {
- "luotu": "2026-11-12T08:10+02:00",
- "lahetetty": "2026-11-12",
- "paiva": "2026-11-12",
- "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.409,
- "tavallinen_liike_pros": 1.517,
+ "luotu": "2026-11-13T08:10+02:00",
+ "lahetetty": "2026-11-13",
+ "paiva": "2026-11-13",
+ "tyyppi": "iso",
+ "odotettu_liike_pros": 1.548,
+ "tavallinen_liike_pros": 1.513,
  "todennakoisyys": {
-  "30": 0.688,
-  "50": 0.276,
-  "100": 0.042
+  "30": 0.824,
+  "50": 0.423,
+  "100": 0.105
  },
- "pienin_stoppi_usd": 13.6,
- "futuurin_hinta": 3983.0,
- "julkaisut": [],
+ "pienin_stoppi_usd": 19.3,
+ "futuurin_hinta": 3903.8,
+ "julkaisut": [
+  {
+   "klo": "15:30",
+   "nimi": "Core PPI m/m",
+   "odotus": "0.3%",
+   "edellinen": "0.7%"
+  },
+  {
+   "klo": "15:30",
+   "nimi": "PPI m/m",
+   "odotus": "0.4%",
+   "edellinen": "1.3%"
+  }
+ ],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
