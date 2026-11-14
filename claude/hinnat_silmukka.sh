@@ -29,6 +29,21 @@ julkaise() {
   )
 }
 
+# KERTAA=historia: kertahaku puuttuvalle jaksolle haaraan "hinnat-historia" (ei koske hinnat-haaraa).
+# dukascopy-python 5.0.0 (28.10.2026) poisti d.fetch-funktion, joten haku käyttää versiota 4.0.1.
+historia() {
+  pip install -q "dukascopy-python==4.0.1" || return 1
+  rm -rf /tmp/hh && python "$PWD/claude/hae_historia.py" /tmp/hh 2026-10-27T00:00:00Z 2026-11-14T00:00:00Z || return 1
+  (
+    cd /tmp/hh &&
+    git init -q -b hinnat-historia &&
+    git add . &&
+    git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+        commit -qm "Minuuttidata 27.10.-13.11.2026" &&
+    git push -qf "$REMOTE" hinnat-historia
+  )
+}
+
 jatka() {
   for i in 1 2 3; do
     gh workflow run hinnat.yml --ref main -R "$GITHUB_REPOSITORY" -f kertaa=0 && return 0
@@ -36,6 +51,11 @@ jatka() {
   done
   echo "Uudelleenkäynnistys epäonnistui."
 }
+
+if [ "${KERTAA:-0}" = "historia" ]; then
+  historia
+  exit $?
+fi
 
 if [ "${KERTAA:-0}" = "1" ]; then
   julkaise
