@@ -31,7 +31,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install dukascopy-python pandas matplotlib
+      # 5.0.0 (28.10.2026) poisti d.fetch-funktion ja pysäytti hintasyötteen: pidetään 4.0.1.
+      - run: pip install "dukascopy-python==4.0.1" pandas matplotlib
       - name: Hae ja julkaise hinnat
         env:
           GH_TOKEN: ${{ github.token }}
