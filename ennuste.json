@@ -1,29 +1,23 @@
 {
- "luotu": "2026-11-13T08:10+02:00",
- "lahetetty": "2026-11-13",
- "paiva": "2026-11-13",
- "tyyppi": "iso",
- "odotettu_liike_pros": 1.548,
- "tavallinen_liike_pros": 1.513,
+ "luotu": "2026-11-16T08:10+02:00",
+ "lahetetty": "2026-11-16",
+ "paiva": "2026-11-16",
+ "tyyppi": "rauhallinen",
+ "odotettu_liike_pros": 1.483,
+ "tavallinen_liike_pros": 1.512,
  "todennakoisyys": {
-  "30": 0.824,
-  "50": 0.423,
-  "100": 0.105
+  "30": 0.634,
+  "50": 0.262,
+  "100": 0.047
  },
- "pienin_stoppi_usd": 19.3,
- "futuurin_hinta": 3903.8,
+ "pienin_stoppi_usd": 13.5,
+ "futuurin_hinta": 3838.3,
  "julkaisut": [
   {
-   "klo": "15:30",
-   "nimi": "Core PPI m/m",
-   "odotus": "0.3%",
-   "edellinen": "0.7%"
-  },
-  {
-   "klo": "15:30",
-   "nimi": "PPI m/m",
-   "odotus": "0.4%",
-   "edellinen": "1.3%"
+   "klo": "19:00",
+   "nimi": "Fed Chairman Warsh Speaks",
+   "odotus": "",
+   "edellinen": ""
   }
  ],
  "ennuste_virhe": null,
