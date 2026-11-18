@@ -1,29 +1,23 @@
 {
- "luotu": "2026-11-17T08:10+02:00",
- "lahetetty": "2026-11-17",
- "paiva": "2026-11-17",
+ "luotu": "2026-11-18T08:10+02:00",
+ "lahetetty": "2026-11-18",
+ "paiva": "2026-11-18",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.437,
- "tavallinen_liike_pros": 1.508,
+ "odotettu_liike_pros": 1.383,
+ "tavallinen_liike_pros": 1.506,
  "todennakoisyys": {
-  "30": 0.642,
-  "50": 0.258,
+  "30": 0.625,
+  "50": 0.245,
   "100": 0.047
  },
- "pienin_stoppi_usd": 13.7,
- "futuurin_hinta": 3883.1,
+ "pienin_stoppi_usd": 13.3,
+ "futuurin_hinta": 3789.0,
  "julkaisut": [
   {
-   "klo": "15:30",
-   "nimi": "Core Retail Sales m/m",
-   "odotus": "0.4%",
-   "edellinen": "0.9%"
-  },
-  {
-   "klo": "15:30",
-   "nimi": "Retail Sales m/m",
-   "odotus": "0.1%",
-   "edellinen": "0.8%"
+   "klo": "21:00",
+   "nimi": "FOMC Meeting Minutes",
+   "odotus": "",
+   "edellinen": ""
   }
  ],
  "ennuste_virhe": null,
