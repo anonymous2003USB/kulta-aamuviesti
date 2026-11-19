@@ -1,25 +1,18 @@
 {
- "luotu": "2026-11-18T08:10+02:00",
- "lahetetty": "2026-11-18",
- "paiva": "2026-11-18",
+ "luotu": "2026-11-19T08:10+02:00",
+ "lahetetty": "2026-11-19",
+ "paiva": "2026-11-19",
  "tyyppi": "rauhallinen",
- "odotettu_liike_pros": 1.383,
- "tavallinen_liike_pros": 1.506,
+ "odotettu_liike_pros": 1.397,
+ "tavallinen_liike_pros": 1.503,
  "todennakoisyys": {
-  "30": 0.625,
-  "50": 0.245,
-  "100": 0.047
+  "30": 0.616,
+  "50": 0.247,
+  "100": 0.042
  },
- "pienin_stoppi_usd": 13.3,
- "futuurin_hinta": 3789.0,
- "julkaisut": [
-  {
-   "klo": "21:00",
-   "nimi": "FOMC Meeting Minutes",
-   "odotus": "",
-   "edellinen": ""
-  }
- ],
+ "pienin_stoppi_usd": 13.1,
+ "futuurin_hinta": 3742.1,
+ "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
