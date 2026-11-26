@@ -1,31 +1,18 @@
 {
- "luotu": "2026-11-25T08:10+02:00",
- "lahetetty": "2026-11-25",
- "paiva": "2026-11-25",
+ "luotu": "2026-11-26T08:10+02:00",
+ "lahetetty": "2026-11-26",
+ "paiva": "2026-11-26",
  "tyyppi": "iso",
- "odotettu_liike_pros": 1.571,
- "tavallinen_liike_pros": 1.498,
+ "odotettu_liike_pros": 1.695,
+ "tavallinen_liike_pros": 1.504,
  "todennakoisyys": {
-  "30": 0.755,
-  "50": 0.358,
-  "100": 0.08
+  "30": 0.791,
+  "50": 0.376,
+  "100": 0.082
  },
- "pienin_stoppi_usd": 17.4,
- "futuurin_hinta": 3517.7,
- "julkaisut": [
-  {
-   "klo": "15:30",
-   "nimi": "Core PCE Price Index m/m",
-   "odotus": "0.3%",
-   "edellinen": "0.3%"
-  },
-  {
-   "klo": "15:30",
-   "nimi": "Prelim GDP q/q",
-   "odotus": "3.5%",
-   "edellinen": "3.4%"
-  }
- ],
+ "pienin_stoppi_usd": 17.9,
+ "futuurin_hinta": 3620.4,
+ "julkaisut": [],
  "ennuste_virhe": null,
  "kalenteri_virhe": null
 }
