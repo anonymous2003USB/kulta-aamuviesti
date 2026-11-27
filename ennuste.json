@@ -1,13 +1,13 @@
 {
- "luotu": "2026-11-26T08:10+02:00",
- "lahetetty": "2026-11-26",
+ "luotu": "2026-11-27T08:10+02:00",
+ "lahetetty": "2026-11-27",
  "paiva": "2026-11-26",
  "tyyppi": "iso",
- "odotettu_liike_pros": 1.695,
- "tavallinen_liike_pros": 1.504,
+ "odotettu_liike_pros": 1.696,
+ "tavallinen_liike_pros": 1.498,
  "todennakoisyys": {
-  "30": 0.791,
-  "50": 0.376,
+  "30": 0.787,
+  "50": 0.375,
   "100": 0.082
  },
  "pienin_stoppi_usd": 17.9,
